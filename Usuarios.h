@@ -12,8 +12,8 @@ struct Usuario
 {
     char id[25];
     char nombre[50];
-    char rol[15];
-    char contrasenia[30]; //
+    char rol[25];
+    char contrasenia[25]; //
     int activo; //Indica si el usuario esta activo 1 es Si 0 es No
 } ;
 
