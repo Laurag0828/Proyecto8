@@ -1,8 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <locale.h>
 
 int main()
 {
-    printf("Hello world!\n");
+    setlocale(LC_ALL, "");
+    printf("Hello world año ó!\n");
     return 0;
 }
