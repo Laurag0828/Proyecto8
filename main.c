@@ -2,6 +2,13 @@
 #include <locale.h>//Para presentar caracteres en español
 #include <windows.h>//Para usar la funcion Sleep
 #include "Usuarios.h"//Incluir el dato de tipo Usuario
+#include "contrasenia.c"//Incluye el archivo .c que contiene a la funcion cambiarContrasenia
+#include "cuestionarios.c"//Incluye el archivo .c que contiene a la funcion manejoCuestionarios
+#include "opciones.c"//Incluye el archivo .c que contiene a la funcion manejoOpciones
+#include "preguntas.c"//Incluye el archivo .c que contiene a la funcion manejoPreguntas
+#include "reportes.c"//Incluye el archivo .c que contiene a la funcion manejoReportes
+#include "respuestas.c"//Incluye el archivo .c que contiene a la funcion responderCuestionario
+#include "usuarios.c"//Incluye el archivo .c que contiene a la funcion manejoUsuarios
 
 int manejoUsuarios(char id[25]); //Prototipo funcion manejo de usuarios
 int manejoCuestionarios(char id[25]); //Prototipo funcion manejo de cuestionarios
