@@ -8,56 +8,84 @@
 int agregarPreguntas(char idCuestionario[10]){
 
     FILE *f; //Apuntador para abrir archivos
+    FILE *f2; //Apuntador para abrir archivos
     struct Cuestionario cuestionario; //Para manejo del cuestionario
     struct Pregunta pregunta; //Para manejo de la pregunta
     struct Opcion opcion; //Para manejo de la opcion
-    int respuesta=2; //Variable para la respuesta del usuario, inicializa en No
+    int j;//Variable contador
     int i; //variable de control para la posicion en el archivo
-    int encontrado=0; //variable de control para saber si se encuentra el cuestionario en el archivo
 
     //Abre el archivo en modo lectura y escritura
-    f = fopen("Cuestionarios.txt","r+");
     printf("-------------------------------------------------------\n");
-    printf("Activar un cuestionario\n");
+    printf("Agregar una nueva pregunta\n");
     printf("-------------------------------------------------------\n");
     //pedir datos del cuestionario a buscar
-    printf("Ingrese el id del cuestionario a activar-->");
-    scanf("%s",idCuestionario);
 
-    i=0; //Inicializa el contador de registros
-
-    //Ciclo para buscar el cuestionario
-    while(fread(&cuestionario,sizeof(struct Cuestionario),1,f)){//Lee el archivo con el tamaño de la  estructura Cuestionario
-        if(strcmp(idCuestionario,cuestionario.idCuestionario)==0){
-            //Si encuentra el cuestionario pregunta si va a activarlo
-            do{
-                printf("Desea activar este cuestionario? (1=Si, 2=No)-->");
-                scanf("%d",&respuesta);
-                fflush(stdin);
-            } while(!(respuesta==1 || respuesta==2));//Repetir hasta que sea 1 o 2
-
-            if(respuesta==1){
-                cuestionario.activo=1;
-                //Busca la posición del cuestionario en el archivo
-                fseek(f,i*sizeof(cuestionario),SEEK_SET);
-                //Escribe el cuestionario modificado en esa posición
-                fwrite(&cuestionario,sizeof(cuestionario),1,f);
-                printf("Cuestionario ahora está activo!\n");
-            }
-            else{
-                printf("Acción cancelada!!!\n");
-            }
-            encontrado=1; //Si se encuentra un cuestionario se cambia la variable de control a encontrado
-            break; //Finaliza la modificacion de cuestionario, termina el ciclo de busqueda
-        }
-        i++;//Si no lo encuentra aumenta la posicion a un registro mas
-    }
-    if(encontrado==0){//Si la variable de control esta en cero significa que no encontró el cuestionario en el archivo
-        printf("----El cuestionario %s no está registrado -----\n",idCuestionario);
-    }
-    //Cerrar el archivo
-    fclose(f);
+    //Abre el archivo de preguntas para agregar
+    f2 = fopen("Preguntas.txt","r+");
+    //copia el id del cuestionario en la pregunta
+    strcpy(pregunta.idCuestionario,cuestionario.idCuestionario);
+    //pedir datos al usuario actual
+    printf("Ingrese el id de la pregunta-->");
+    scanf("%s",pregunta.idPregunta);
+    fflush(stdin);
+    printf("Ingrese el texto de la pregunta-->");
+    gets(pregunta.texto);
+    fflush(stdin);
+    printf("Ingrese la cantidad de opciones-->");
+    scanf("%d",&pregunta.cantOpciones);
+    fflush(stdin);
+    printf("Ingrese cuantos puntos vale la pregunta-->");
+    scanf("%d",&pregunta.puntos);
+    fflush(stdin);
+    //Escribir la pregunta en el archivo
+    fwrite(&pregunta, sizeof(pregunta),1,f2);
+    fclose(f2);
+    printf("Registro guardado, ahora agregaremos las opciones de esta pregunta\n");
     system("pause");
     system("cls");
+
+    for(j=1;j<=pregunta.cantOpciones;j++){
+
+        f2 = fopen("Opciones.txt","r+");
+        //copia el id del cuestionario y de la pregunta en la opcion
+        strcpy(opcion.idCuestionario,idCuestionario);
+        strcpy(opcion.idPregunta,pregunta.idPregunta);
+        //pedir datos al usuario actual
+        printf("Ingrese el caracter de la opción-->");
+        scanf("%c",&opcion.opcion);
+        fflush(stdin);
+        printf("Ingrese el texto de la opción-->");
+        gets(opcion.texto);
+        fflush(stdin);
+        do{
+           printf("Es esta la opción correcta de la pregunta? (1=Si, 0=No)-->");
+           scanf("%d",&opcion.correcta);
+           fflush(stdin);
+        } while(!(opcion.correcta==1 || opcion.correcta==0));//Repetir hasta que sea 1 o 0
+        //Escribir la pregunta en el archivo
+        fwrite(&opcion, sizeof(opcion),1,f2);
+        fclose(f2);
+        printf("Registro guardado\n");
+        system("pause");
+        system("cls");
+
+    }
+
+    f = fopen("Cuestionarios.txt","r+")
+
+    i=0;
+    while(fread(&cuestionario,sizeof(struct Cuestionario),1,f)){
+        if(strcmp(idCuestionario,cuestionario.idCuestionario)==0){
+
+            fseek(f,i*sizeof(cuestionario),SEEK_SET);
+            //Escribe el cuestionario modificado en esa posición
+            fwrite(&cuestionario,sizeof(cuestionario),1,f);
+            printf("Cuestionario modificado!\n");
+            break;
+        }
+        i++;
+    }
+
     return 0;
 }
