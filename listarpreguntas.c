@@ -17,12 +17,12 @@ int listarPreguntas(char idCuestionario[10])
     printf("Listado de preguntas en el cuestionario %s\n", idCuestionario);
     printf("-------------------------------------------------------------------\n");
 
-    printf("%-10s%-60s%-20s%10s\n","Id","Descripción","Cantidad Opciones","Puntaje");
-
-
+    printf("%-10s%-10s%-60s%-10s%-10s\n","Cuest","Id","Descripción","Cantidad Opciones","Puntaje");
 
     while(fread(&pregunta,sizeof(struct Pregunta),1,f)){//Lee el archivo con el tamaño de la  estructura Pregunta
-        printf("%-10s%-60s%10d%10d\n",pregunta.idPregunta,pregunta.texto,pregunta.cantOpciones,pregunta.puntos);
+        if (strcmp(idCuestionario, pregunta.idCuestionario)==0){
+            printf("%-10s%-10s%-60s%-10d%-10d\n",pregunta.idCuestionario,pregunta.idPregunta,pregunta.texto,pregunta.cantOpciones,pregunta.puntos);
+        }
     }
     //Cierra el archivo
     fclose(f);
@@ -30,24 +30,4 @@ int listarPreguntas(char idCuestionario[10])
     system("cls");
 
     return 0;
-
-
-    /*FILE *f; //Apuntador para abrir archivos
-    struct Cuestionario cuestionario; //Para manejo del cuestionario
-    //consulta todos los cuestionarios
-    printf("-------------------------------------------------------------------\n");
-    printf("Listado de cuestionarios en el Sistema de evaluaciones ISI - UCA\n");
-    printf("-------------------------------------------------------------------\n");
-    //Abre el archivo
-
-    f = fopen("Cuestionarios.txt","r");
-    printf("%-10s%-60s%-20s%10s%10s\n","Id","Descripcion","Asignatura","No. preguntas","Activo");
-    while(fread(&cuestionario,sizeof(struct Cuestionario),1,f)){//Lee el archivo con el tamaño de la  estructura Cuestionario
-        printf("%-10s%-60s%-20s%10d%10d\n",cuestionario.idCuestionario,cuestionario.descripcion,cuestionario.asignatura,cuestionario.cantPreg,cuestionario.activo);
-    }
-    //Cierra el archivo
-    fclose(f);
-    system("pause");
-    system("cls");
-    return 0;*/
 }
