@@ -17,8 +17,8 @@ int manejoUsuarios(char id[25])
     struct Usuario usuario; //Para manejo de usuarios
     char idBuscar[20]; //Para buscar un usuario
     int i; //Contador para encontrar la posicion del usuario en el archivo
-    int j; //variable de control para saber si se encuentra un usuario
-    int k; //variable de control para saber la respuesta del usuario
+    int encontrado; //variable de control para saber si se encuentra un usuario
+    int respuesta; //variable de control para saber la respuesta del usuario
     //Ciclo do...while para repetir el menu hasta que se selecciona 9 para salir al menu principal
     do{
         printf("-------------------------------------------------------\n");
@@ -80,7 +80,7 @@ int manejoUsuarios(char id[25])
             scanf("%s",idBuscar);
 
             //Leer el contenido del archivo y busca el usuario por el id
-            j=0; //Inicializa la variable de control que indica cuando se encuenta un usuario
+            encontrado=0; //Inicializa la variable de control en usuario aun no encontrado
             i=0; //Inicializa el contador a cero que es el inicio del archivo
             while(fread(&usuario,sizeof(struct Usuario),1,f)){//Lee el archivo con el tamaño de la  estructura Usuario
                 if(strcmp(idBuscar,usuario.id)==0){
@@ -122,12 +122,12 @@ int manejoUsuarios(char id[25])
                     //Escribe el usuario en esa posición
                     fwrite(&usuario,sizeof(usuario),1,f);
                     printf("Registro modificado\n");
-                    j++; //Si se encuentra un usuario se aumenta la variable de control en 1
+                    encontrado = 1; //Si se encuentra un usuario la variable de control se cambia a encontrado
                     break; //Finaliza la modificacion de usuario, termina el ciclo de busqueda
                 }
                 i++;//Si no lo encuentra aumenta el contador a un registro mas
             }
-            if(j==0){//Si la variable de control esta en cero significa que no encontró al usuario en el archivo de usuarios
+            if(encontrado==0){//Si la variable de control esta en cero significa que no encontró al usuario en el archivo de usuarios
                 printf("----El usuario %s no está registrado -----\n",idBuscar);
             }
             //Cerrar el archivo
@@ -146,12 +146,12 @@ int manejoUsuarios(char id[25])
             scanf("%s",idBuscar);
 
             //Leer el contenido del archivo y busca el usuario por el id
-            j=0; //Inicializa la variable de control que indica cuando se encuenta un usuario
+            encontrado=0; //Inicializa la variable de control en no encontrado
             i=0; //Inicializa el contador a cero que es el inicio del archivo
-            k=0; //Inicializa la variable para la respuesta del usuario
+            respuesta=2; //Inicializa la variable para la respuesta del usuario en No
             while(fread(&usuario,sizeof(struct Usuario),1,f)){//Lee el archivo con el tamaño de la  estructura Usuario
                 if(strcmp(idBuscar,usuario.id)==0){
-                    //Si encuentra el usuario presenta los datos en pantalla y pide los nuevos datos
+                    //Si encuentra el usuario presenta los datos en pantalla y pregunta si va a anular el registro
                     printf("----Datos actuales almacenados----------------\n");
                     printf("%s %s\n","Id: ",usuario.id);
                     printf("%s %s\n","Nombre: ",usuario.nombre);
@@ -161,11 +161,11 @@ int manejoUsuarios(char id[25])
 
                     do{
                         printf("Desea anular este usuario? (1=Si, 2=No)-->");
-                        scanf("%d",&k);
+                        scanf("%d",&respuesta);
                         fflush(stdin);
-                    } while(!(k==1 || k==2));//Repetir hasta que sea 1 o 2
+                    } while(!(respuesta==1 || respuesta==2));//Repetir hasta que sea 1 o 2
 
-                    if(k==1){
+                    if(respuesta==1){
                         usuario.activo=0;
                         //Busca la posición del usuario en el archivo
                         fseek(f,i*sizeof(usuario),SEEK_SET);
@@ -173,12 +173,12 @@ int manejoUsuarios(char id[25])
                         fwrite(&usuario,sizeof(usuario),1,f);
                         printf("Usuario anulado\n");
                     }
-                    j++; //Si se encuentra un usuario se aumenta la variable de control en 1
+                    encontrado=1; //Si se encuentra un usuario se cambia la variable de control a encontrado
                     break; //Finaliza la modificacion de usuario, termina el ciclo de busqueda
                 }
                 i++;//Si no lo encuentra aumenta el contador a un registro mas
             }
-            if(j==0){//Si la variable de control esta en cero significa que no encontró al usuario en el archivo de usuarios
+            if(encontrado==0){//Si la variable de control esta en cero significa que no encontró al usuario en el archivo de usuarios
                 printf("----El usuario %s no está registrado -----\n",idBuscar);
             }
             //Cerrar el archivo

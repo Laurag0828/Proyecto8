@@ -2,13 +2,6 @@
 #include <locale.h>//Para presentar caracteres en español
 #include <windows.h>//Para usar la funcion Sleep
 #include "Usuarios.h"//Incluir el dato de tipo Usuario
-#include "contrasenia.c"//Incluye el archivo .c que contiene a la funcion cambiarContrasenia
-#include "cuestionarios.c"//Incluye el archivo .c que contiene a la funcion manejoCuestionarios
-#include "opciones.c"//Incluye el archivo .c que contiene a la funcion manejoOpciones
-#include "preguntas.c"//Incluye el archivo .c que contiene a la funcion manejoPreguntas
-#include "reportes.c"//Incluye el archivo .c que contiene a la funcion manejoReportes
-#include "respuestas.c"//Incluye el archivo .c que contiene a la funcion responderCuestionario
-#include "usuarios.c"//Incluye el archivo .c que contiene a la funcion manejoUsuarios
 
 int manejoUsuarios(char id[25]); //Prototipo funcion manejo de usuarios
 int manejoCuestionarios(char id[25]); //Prototipo funcion manejo de cuestionarios
@@ -71,17 +64,17 @@ int main()
                             printf("-------------------------------------------------------\n");
                             //Evalúa si el usuario ingresado es docente y presenta las opciones del docente
                             if(strcmp(usuarioLogeado.rol,"docente")==0){
-                                printf("1.Manejo de cuestionarios\n");
-                                printf("2.Manejo de usuarios\n");
-                                printf("3.Reportes\n");
+                                printf("[1] Manejo de cuestionarios\n");
+                                printf("[2] Manejo de usuarios\n");
+                                printf("[3] Reportes\n");
                             }
                             //Evalúa si el usuario ingresado es estudiante y presenta las opciones del estudiante
                             if(strcmp(usuarioLogeado.rol,"estudiante")==0){
-                                printf("4.Responder un cuestionario\n");
+                                printf("[4] Responder un cuestionario\n");
                             }
                             //Opciones para todos los usuarios
-                            printf("5.Cambiar mi contraseña\n");
-                            printf("9.Salir del sistema\n");
+                            printf("[5] Cambiar mi contraseña\n");
+                            printf("[9] Salir del sistema\n");
                             printf("-------------------------------------------------------\n");
 
                             printf("Su selección-->");
