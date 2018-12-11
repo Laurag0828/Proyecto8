@@ -17,7 +17,7 @@ int listarPreguntas(char idCuestionario[10])
     printf("Listado de preguntas en el cuestionario %s\n", idCuestionario);
     printf("-------------------------------------------------------------------\n");
 
-    printf("%-10s%-10s%-60s%-10s%-10s\n","Cuest","Id","Descripción","Cantidad Opciones","Puntaje");
+    printf("%-10s%-10s%-60s%-10s%-10s\n","Cuest","Id","Descripción","Opciones","Puntaje");
 
     while(fread(&pregunta,sizeof(struct Pregunta),1,f)){//Lee el archivo con el tamaño de la  estructura Pregunta
         if (strcmp(idCuestionario, pregunta.idCuestionario)==0){
