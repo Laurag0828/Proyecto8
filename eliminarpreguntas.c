@@ -6,7 +6,7 @@
 
 int eliminarPreguntas(char idCuestionario[10]){
 
-    FILE *f; //Apuntador para abrir archivos
+    /*FILE *f; //Apuntador para abrir archivos
     struct Cuestionario cuestionario; //Para manejo del cuestionario
     struct Pregunta pregunta; //Para manejo de la pregunta
     char idPregunta[10];
@@ -63,6 +63,6 @@ int eliminarPreguntas(char idCuestionario[10]){
     //Cerrar el archivo
     fclose(f);
     system("pause");
-    system("cls");
+    system("cls");*/
     return 0;
 }

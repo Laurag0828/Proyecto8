@@ -7,7 +7,7 @@
 
 //Función modificar preguntas
 int modificarPreguntas(char idCuestionario[10]){
-char idBuscar[20];
+/*char idBuscar[20];
 int i; //Contador para encontrar la posicion de la pregunta en el archivo
 int encontrado; //variable de control para saber si se encuentra una pregunta
 FILE *f;
@@ -43,7 +43,7 @@ while(fread(&pregunta,sizeof(struct Pregunta),1,f)){//Lee el archivo con el tama
             } while(!(respuesta==1 || respuesta==2));//Repetir hasta que sea 1 o 2
 
     }
-}
+}*/
 
 return 0;
 }
