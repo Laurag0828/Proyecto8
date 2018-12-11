@@ -72,7 +72,7 @@ int agregarPreguntas(char idCuestionario[10]){
 
     }
 
-    f = fopen("Cuestionarios.txt","r+")
+    f = fopen("Cuestionarios.txt","r+");
 
     i=0;
     while(fread(&cuestionario,sizeof(struct Cuestionario),1,f)){
