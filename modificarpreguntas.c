@@ -36,7 +36,7 @@ while(fread(&pregunta,sizeof(struct Pregunta),1,f)){//Lee el archivo con el tama
 
        do{
                 printf("\n\nId: %s", pregunta.idPregunta);
-                printf("\nDescripción: %s", pregunta.descripcion);
+                printf("\nDescripción: %s", pregunta.texto);
                 printf("Desea modificar este cuestionario? (1=Si, 2=No)-->");
                 scanf("%d",&respuesta);
                 fflush(stdin);

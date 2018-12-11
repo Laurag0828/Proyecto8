@@ -1,7 +1,6 @@
 #include <stdio.h>//Funciones basicas de entrada salida
 #include <locale.h>//Para presentar caracteres en español
 #include <windows.h>//Para usar la funcion Sleep
-#include "Preguntas.h"//Incluir el dato de tipo Pregunta
 /***
 
 Archivo fuente para el manejo de preguntas
@@ -11,8 +10,8 @@ Archivo fuente para el manejo de preguntas
 //Prototipos de funciones
 int listarPreguntas(char idCuestionario[10]);
 int agregarPreguntas(char idCuestionario[10]);
-int modificarPreguntas(char idCuestionario[10],char idPregunta[10]);
-int eliminarPreguntas(char idCuestionario[10],char idPregunta[10]);
+int modificarPreguntas(char idCuestionario[10]);
+int eliminarPreguntas(char idCuestionario[10]);
 
 int manejoOpciones(char id[25],char idCuestionario[10],char idPregunta[10]); //Prototipo funcion manejo de preguntas
 
@@ -43,22 +42,24 @@ int manejoPreguntas(char id[25],char idCuestionario[10])
 
         switch(opcionPreguntas){
         case 1:
-            //Agrega un pregunta nueva en el cuestionario
-
+            //Presenta una lista de todos los preguntas en este cuestionario
+            listarPreguntas(id);
             break;
         case 2:
-            //Modifica los datos de la pregunta
-
+            //Agrega un pregunta nueva en el cuestionario
+            agregarPreguntas(id);
             break;
         case 3:
-            //Llama a la funcion para gestionar las opciones de una pregunta
-            manejoOpciones(id,"0001","00001");
+            //Modifica los datos de la pregunta
+            modificarPreguntas(id);
             break;
         case 4:
-            //Desactiva un pregunta
+            //Elimina un pregunta
+            eliminarPreguntas(id);
             break;
         case 5:
-            //Presenta una lista de todos los preguntas en este cuestionario
+            //Llama a la funcion para gestionar las opciones de una pregunta
+            manejoOpciones(id,"0001","00001");
             break;
         case 9:
             printf("Regresando a la pantalla de cuestionarios...\n");
