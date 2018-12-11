@@ -43,19 +43,19 @@ int manejoPreguntas(char id[25],char idCuestionario[10])
         switch(opcionPreguntas){
         case 1:
             //Presenta una lista de todos los preguntas en este cuestionario
-            listarPreguntas(id);
+            listarPreguntas(idCuestionario);
             break;
         case 2:
             //Agrega un pregunta nueva en el cuestionario
-            agregarPreguntas(id);
+            agregarPreguntas(idCuestionario);
             break;
         case 3:
             //Modifica los datos de la pregunta
-            modificarPreguntas(id);
+            modificarPreguntas(idCuestionario);
             break;
         case 4:
             //Elimina un pregunta
-            eliminarPreguntas(id);
+            eliminarPreguntas(idCuestionario);
             break;
         case 5:
             //Llama a la funcion para gestionar las opciones de una pregunta
