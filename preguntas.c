@@ -8,6 +8,12 @@ Archivo fuente para el manejo de preguntas
 
 ***/
 
+//Prototipos de funciones
+int listarPreguntas(char idCuestionario[10]);
+int agregarPreguntas(char idCuestionario[10]);
+int modificarPreguntas(char idCuestionario[10],char idPregunta[10]);
+int eliminarPreguntas(char idCuestionario[10],char idPregunta[10]);
+
 int manejoOpciones(char id[25],char idCuestionario[10],char idPregunta[10]); //Prototipo funcion manejo de preguntas
 
 int manejoPreguntas(char id[25],char idCuestionario[10])
@@ -22,11 +28,12 @@ int manejoPreguntas(char id[25],char idCuestionario[10])
         printf("%s %s\n","Cuestionario actual: ", idCuestionario);
         printf("%s %s\n","Usuario actual: ", id);
         printf("---------------------------------------------------------------\n");
-        printf("1. Agregar pregunta\n");
-        printf("2. Modificar pregunta\n");
-        printf("3. Gestionar opciones de un pregunta\n");
-        printf("4. Desactivar pregunta\n");
-        printf("5. Listar preguntas de este cuestionario\n");
+        printf("[1] Listar preguntas de este cuestionario\n");
+        printf("[2] Agregar pregunta\n");
+        printf("[3] Modificar pregunta\n");
+        printf("[4] Eliminar pregunta\n");
+        printf("[5] Gestionar opciones de una pregunta\n");
+
         printf("9. Regresar a menú cuestionarios\n");
 
         printf("-------------------------------------------------------\n");
@@ -37,6 +44,7 @@ int manejoPreguntas(char id[25],char idCuestionario[10])
         switch(opcionPreguntas){
         case 1:
             //Agrega un pregunta nueva en el cuestionario
+
             break;
         case 2:
             //Modifica los datos de la pregunta

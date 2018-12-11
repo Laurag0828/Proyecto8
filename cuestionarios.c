@@ -11,8 +11,8 @@ int agregarCuestionario(); //Prototipo de funcion para crear cuestionarios
 int activarCuestionario(); //Prototipo de funcion para activar Cuestionarios
 int desactivarCuestionario(); //Prototipo de funcion para desactivar Cuestionarios
 int modificarCuestionario(); //Prototipo de funcion para modificar Cuestionarios
+int gestionarCuestionario(char id[25]); //Prototipo de funcion para llamar a la gestion del cuestionario
 int listarCuestionario(); //Prototipo de funcion para listar cuestionariosactivarCuestionario
-int manejoPreguntas(char id[25],char idCuestionario[10]); //Prototipo funcion manejo de preguntas
 
 int manejoCuestionarios(char id[25])
 {
@@ -61,7 +61,7 @@ int manejoCuestionarios(char id[25])
             break;
         case 6:
             //Llama a la funcion para gestionar las preguntas de un cuestionario
-            manejoPreguntas(id,"0001");
+            gestionarCuestionario(id);
             break;
         case 9:
             printf("Regresando a la pantalla principal...\n");

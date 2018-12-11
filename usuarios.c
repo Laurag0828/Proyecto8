@@ -25,11 +25,13 @@ int manejoUsuarios(char id[25])
         printf("Sistema de evaluaciones ISI - UCA - Manejo de usuarios\n");
         printf("%s %s\n","Usuario actual: ", id);
         printf("-------------------------------------------------------\n");
-        printf("1. Agregar usuario\n");
-        printf("2. Modificar usuario\n");
-        printf("3. Anular usuario\n");
-        printf("4. Listar usuarios\n");
-        printf("9. Regresar a menú principal\n");
+        printf("[1] Agregar usuario\n");
+        printf("[2] Modificar usuario\n");
+        printf("[3] Anular usuario\n");
+        printf("[4] Activar usuario\n");
+        printf("[5] Listar usuarios\n");
+        printf("[6] Buscar un usuario\n");
+        printf("[9] Regresar a menú principal\n");
 
         printf("-------------------------------------------------------\n");
         printf("Su selección-->");
@@ -111,12 +113,6 @@ int manejoUsuarios(char id[25])
                     scanf("%s",usuario.contrasenia);
                     fflush(stdin);
 
-                    do{
-                        printf("Es usuario activo? (1=Si, 0=No)-->");
-                        scanf("%d",&usuario.activo);
-                        fflush(stdin);
-                    } while(!(usuario.activo==1 || usuario.activo==0));//Repetir hasta que sea 1 o 0
-
                     //Busca la posición del usuario en el archivo
                     fseek(f,i*sizeof(usuario),SEEK_SET);
                     //Escribe el usuario en esa posición
@@ -171,7 +167,7 @@ int manejoUsuarios(char id[25])
                         fseek(f,i*sizeof(usuario),SEEK_SET);
                         //Escribe el usuario en esa posición
                         fwrite(&usuario,sizeof(usuario),1,f);
-                        printf("Usuario anulado\n");
+                        printf("Usuario anulado!\n");
                     }
                     encontrado=1; //Si se encuentra un usuario se cambia la variable de control a encontrado
                     break; //Finaliza la modificacion de usuario, termina el ciclo de busqueda
@@ -187,6 +183,57 @@ int manejoUsuarios(char id[25])
             system("cls");
             break;
         case 4:
+            //Abre el archivo en modo lectura y escritura
+            f = fopen("Usuarios.txt","r+");
+            printf("-------------------------------------------------------\n");
+            printf("Activar un usuario\n");
+            printf("-------------------------------------------------------\n");
+            //pedir datos del usuario a activar
+            printf("Ingrese el id del usuario a activar-->");
+            scanf("%s",idBuscar);
+
+            //Leer el contenido del archivo y busca el usuario por el id
+            encontrado=0; //Inicializa la variable de control en no encontrado
+            i=0; //Inicializa el contador a cero que es el inicio del archivo
+            respuesta=2; //Inicializa la variable para la respuesta del usuario en No
+            while(fread(&usuario,sizeof(struct Usuario),1,f)){//Lee el archivo con el tamaño de la  estructura Usuario
+                if(strcmp(idBuscar,usuario.id)==0){
+                    //Si encuentra el usuario presenta los datos en pantalla y pregunta si va a activar el registro
+                    printf("----Datos actuales almacenados----------------\n");
+                    printf("%s %s\n","Id: ",usuario.id);
+                    printf("%s %s\n","Nombre: ",usuario.nombre);
+                    printf("%s %s\n","Rol: ",usuario.rol);
+                    printf("%s %d\n","Activo: ",usuario.activo);
+                    printf("----------------------------------------------\n");
+
+                    do{
+                        printf("Desea activar este usuario? (1=Si, 2=No)-->");
+                        scanf("%d",&respuesta);
+                        fflush(stdin);
+                    } while(!(respuesta==1 || respuesta==2));//Repetir hasta que sea 1 o 2
+
+                    if(respuesta==1){
+                        usuario.activo=1;
+                        //Busca la posición del usuario en el archivo
+                        fseek(f,i*sizeof(usuario),SEEK_SET);
+                        //Escribe el usuario en esa posición
+                        fwrite(&usuario,sizeof(usuario),1,f);
+                        printf("Usuario activado!\n");
+                    }
+                    encontrado=1; //Si se encuentra un usuario se cambia la variable de control a encontrado
+                    break; //Finaliza la modificacion de usuario, termina el ciclo de busqueda
+                }
+                i++;//Si no lo encuentra aumenta el contador a un registro mas
+            }
+            if(encontrado==0){//Si la variable de control esta en cero significa que no encontró al usuario en el archivo de usuarios
+                printf("----El usuario %s no está registrado -----\n",idBuscar);
+            }
+            //Cerrar el archivo
+            fclose(f);
+            system("pause");
+            system("cls");
+            break;
+        case 5:
             //consulta todos los usuarios
             printf("-------------------------------------------------------------------\n");
             printf("Listado de usuarios en el Sistema de evaluaciones ISI - UCA\n");
@@ -196,6 +243,39 @@ int manejoUsuarios(char id[25])
             while(fread(&usuario,sizeof(struct Usuario),1,f)){//Lee el archivo con el tamaño de la  estructura Usuario
                 printf("%-20s%-20s%-20s%10d\n",usuario.id,usuario.nombre,usuario.rol,usuario.activo);
             }
+            fclose(f);
+            system("pause");
+            system("cls");
+            break;
+        case 6:
+            //Abre el archivo en modo lectura
+            f = fopen("Usuarios.txt","r");
+            printf("-------------------------------------------------------\n");
+            printf("Datos de un usuario\n");
+            printf("-------------------------------------------------------\n");
+            //pedir datos del usuario a buscar
+            printf("Ingrese el id del usuario a buscar-->");
+            scanf("%s",idBuscar);
+
+            //Leer el contenido del archivo y busca el usuario por el id
+            encontrado=0; //Inicializa la variable de control en usuario aun no encontrado
+            while(fread(&usuario,sizeof(struct Usuario),1,f)){//Lee el archivo con el tamaño de la  estructura Usuario
+                if(strcmp(idBuscar,usuario.id)==0){
+                    //Si encuentra el usuario presenta los datos en pantalla y pide los nuevos datos
+                    printf("----Datos actuales almacenados----------------\n");
+                    printf("%s %s\n","Id: ",usuario.id);
+                    printf("%s %s\n","Nombre: ",usuario.nombre);
+                    printf("%s %s\n","Rol: ",usuario.rol);
+                    printf("%s %d\n","Activo: ",usuario.activo);
+                    printf("----------------------------------------------\n");
+                    encontrado = 1; //Si se encuentra un usuario la variable de control se cambia a encontrado
+                    break; //Finaliza la modificacion de usuario, termina el ciclo de busqueda
+                }
+            }
+            if(encontrado==0){//Si la variable de control esta en cero significa que no encontró al usuario en el archivo de usuarios
+                printf("----El usuario %s no está registrado -----\n",idBuscar);
+            }
+            //Cerrar el archivo
             fclose(f);
             system("pause");
             system("cls");

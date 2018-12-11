@@ -18,7 +18,7 @@ int main()
     struct Usuario usuarioLogeado; //Para usuario en el sistema
     char idUsuario[25];//Para buscar el usuario
     char contrasenia[25];//Para validar la contraseña
-    int i; //variable de control para mostrar mensaje que no se encontró usuario registrado
+    int encontrado=0; //variable de control para mostrar mensaje que no se encontró usuario registrado inicializado en 0 para no encontrado
     printf("-------------------------------------------------------\n");
     printf("Sistema de evaluaciones ISI - UCA - Ingreso de usuario \n");
     printf("-------------------------------------------------------\n");
@@ -39,12 +39,11 @@ int main()
     printf("Ingrese su id de usuario:");
     scanf("%s",idUsuario);
 
-    i=0;//Inicializa la variable de control a cero
 
     while(fread(&usuarioLogeado,sizeof(struct Usuario),1,f)){//Lee el archivo con el tamaño de la  estructura Usuario
         if(strcmp(idUsuario,usuarioLogeado.id)==0){
-            //Si encuentra el id del usuario incrementa la variable de control e inicia ciclo para pedir contraseña
-            i++;
+            //Si encuentra el id del usuario la variable de control la pone en 1 que es encontrado
+            encontrado=1;
             if(usuarioLogeado.activo==1){
                 do{
                     printf("Ingrese su contraseña:");//Pide la contraseña
@@ -160,7 +159,7 @@ int main()
             }
         }
     }
-    if(i==0){//Si la variable de control esta en cero significa que no encontró al usuario en el archivo de usuarios
+    if(encontrado==0){//Si la variable de control esta en cero significa que no encontró al usuario en el archivo de usuarios
         printf("----El usuario %s no está registrado -----\n",idUsuario);
     }
 

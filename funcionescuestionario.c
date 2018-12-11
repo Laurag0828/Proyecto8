@@ -5,6 +5,8 @@
 #include "Preguntas.h"//Incluir el dato de tipo Pregunta
 #include "Opciones.h"//Incluir el dato de tipo Opcion
 
+int manejoPreguntas(char id[25],char idCuestionario[10]); //Prototipo funcion manejo de preguntas
+
 int agregarCuestionario(){
 
     FILE *f; //Apuntador para abrir archivos
@@ -87,6 +89,7 @@ int agregarCuestionario(){
             //Abre el archivo de preguntas para agregar
             f = fopen("Opciones.txt","a");
             printf("-------------------------------------------------------\n");
+            printf("Pregunta %s\n",pregunta.texto);
             printf("Opción número %d de %d\n",j,pregunta.cantOpciones);
             printf("-------------------------------------------------------\n");
             //copia el id del cuestionario y de la pregunta en la opcion
@@ -280,6 +283,59 @@ int modificarCuestionario(){
                 //Escribe el cuestionario modificado en esa posición
                 fwrite(&cuestionario,sizeof(cuestionario),1,f);
                 printf("Cuestionario modificado!\n");
+            }
+            else{
+                printf("Acción cancelada!!!\n");
+            }
+            encontrado=1; //Si se encuentra un cuestionario se cambia la variable de control a encontrado
+            break; //Finaliza la modificacion de cuestionario, termina el ciclo de busqueda
+        }
+        i++;//Si no lo encuentra aumenta la posicion a un registro mas
+    }
+    if(encontrado==0){//Si la variable de control esta en cero significa que no encontró el cuestionario en el archivo
+        printf("----El cuestionario %s no está registrado -----\n",idCuestionario);
+    }
+    //Cerrar el archivo
+    fclose(f);
+    system("pause");
+    system("cls");
+    return 0;
+}
+
+
+int gestionarCuestionario(char id[25]){
+
+    FILE *f; //Apuntador para abrir archivos
+    struct Cuestionario cuestionario; //Para manejo del cuestionario
+    char idCuestionario[10];
+    int i; //variable de control para la posicion en el archivo
+    int respuesta=2; //Variable para la respuesta del usuario, inicializa en No
+    int encontrado=0; //variable de control para saber si se encuentra el cuestionario en el archivo
+
+    //Abre el archivo en modo lectura y escritura
+    f = fopen("Cuestionarios.txt","r+");
+    printf("-------------------------------------------------------\n");
+    printf("Gestionar un cuestionario\n");
+    printf("-------------------------------------------------------\n");
+    //pedir datos del cuestionario a buscar
+    printf("Ingrese el id del cuestionario a gestionar-->");
+    scanf("%s",idCuestionario);
+
+    i=0; //Inicializa el contador de registros
+
+    //Ciclo para buscar el cuestionario
+    while(fread(&cuestionario,sizeof(struct Cuestionario),1,f)){//Lee el archivo con el tamaño de la  estructura Cuestionario
+        if(strcmp(idCuestionario,cuestionario.idCuestionario)==0){
+            //Si encuentra el cuestionario pregunta si va a desactivarlo
+            do{
+                printf("Desea gestionar este cuestionario? (1=Si, 2=No)-->");
+                scanf("%d",&respuesta);
+                fflush(stdin);
+            } while(!(respuesta==1 || respuesta==2));//Repetir hasta que sea 1 o 2
+
+            if(respuesta==1){
+                system("cls");
+                manejoPreguntas(id,cuestionario.idCuestionario);
             }
             else{
                 printf("Acción cancelada!!!\n");
