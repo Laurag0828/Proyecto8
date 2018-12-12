@@ -1,7 +1,7 @@
 #include <stdio.h>//Funciones basicas de entrada salida
 #include <locale.h>//Para presentar caracteres en español
 #include <windows.h>//Para usar la funcion Sleep
-#include "Opciones.h"//Incluir el dato de tipo Opcion
+#include "Preguntas.h"//Incluir el dato de tipo Opcion
 /***
 
 Archivo fuente para el manejo de opciones
@@ -16,6 +16,27 @@ int manejoOpciones(char idUsuario[25],char idCuestionario[10],char descCuestiona
 {
     //Variable para el control del menu de opciones
     int opcionOpciones;
+    FILE *f;
+    int encontrado=0;
+    struct Pregunta pregunta;
+    //Abre el archivo en modo lectura y escritura
+    f = fopen("Preguntas.txt","r");
+    while(fread(&pregunta,sizeof(struct Pregunta),1,f)){//Lee el archivo con el tamaño de la  estructura Pregunta
+        if(strcmp(idPregunta,pregunta.idPregunta)==0 && strcmp(idCuestionario, pregunta.idCuestionario)==0 && strcmp(idUsuario,pregunta.idUsuario)==0){
+            encontrado=1; //Si se encuentra una pregunta se cambia la variable de control a encontrado
+            break; //Finaliza la modificacion de la pregunta, termina el ciclo de busqueda
+        }
+    }
+    //cerrar el archivo
+    fclose(f);
+
+    if(encontrado==0){//Si la variable de control esta en cero significa que no encontró el cuestionario en el archivo
+        printf("----La pregunta %s no está registrada -----\n",idPregunta);
+        system("pause");
+        system("cls");
+        return 0;
+    }
+
 
     //Ciclo do...while para repetir el menu hasta que se selecciona 9 para salir al menu de preguntas
     do{
