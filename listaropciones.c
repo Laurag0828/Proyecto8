@@ -8,13 +8,13 @@ int listarOpciones(char idCuestionario[10],char descCuestionario[100],char idUsu
     FILE *f;
     struct Opcion opcion;
 
-    f = fopen("Opciones.txt","a");
+    f = fopen("Opciones.txt","r");
 
     //Descripicon de la pregunta
 
     printf("-------------------------------------------------------------------\n");
     printf("Listado de opciones en pregunta %s\n", idPregunta);
-    printf("Cuestionario %s\n", descCuestionario);
+    printf("Cuestionario %s - %s\n", idCuestionario ,descCuestionario);
     printf("Usuario: %s\n", idUsuario);
     printf("-------------------------------------------------------------------\n");
 
