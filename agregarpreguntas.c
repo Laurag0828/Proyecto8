@@ -12,19 +12,16 @@ int agregarPreguntas(char idCuestionario[10],char descCuestionario[100],char idU
     struct Pregunta pregunta; //Para manejo de la pregunta
     struct Opcion opcion; //Para manejo de la opcion
     int j;//Variable ciclo de opciones
-    int i; //variable de control para la posicion en el archivo
-
-    //Abre el archivo en modo lectura y escritura
-    printf("-------------------------------------------------------\n");
-    printf("Agregar una nueva pregunta\n");
-    printf("%s %s\n","Cuestionario actual: ", descCuestionario);
-    printf("-------------------------------------------------------\n");
 
     //Abre el archivo de preguntas para agregar
-    f = fopen("Preguntas.txt","r+");
+    f = fopen("Preguntas.txt","a");
+    printf("-------------------------------------------------------\n");
+    printf("Agregar pregunta al cuestionario %s\n",descCuestionario);
+    printf("-------------------------------------------------------\n");
     //copia el id del cuestionario en la pregunta
     strcpy(pregunta.idCuestionario,cuestionario.idCuestionario);
     strcpy(pregunta.idUsuario,idUsuario);//copia el usuario
+    fflush(stdin);
     //pedir datos al usuario actual
     printf("Ingrese el id de la pregunta-->");
     scanf("%s",pregunta.idPregunta);
@@ -45,23 +42,32 @@ int agregarPreguntas(char idCuestionario[10],char descCuestionario[100],char idU
     system("pause");
     system("cls");
 
-    for(j=1;j<=pregunta.cantOpciones;j++){
+    //Una vez guardada la pregunta, agrega las opciones
 
-        f = fopen("Opciones.txt","r+");
-        //copia el id del cuestionario y de la pregunta en la opcion
-        strcpy(opcion.idCuestionario,idCuestionario);
+    //Ciclo para agragar las opciones de esta pregunta
+    for(j=1;j<=pregunta.cantOpciones;j++){
+        //Abre el archivo de preguntas para agregar
+        f = fopen("Opciones.txt","a");
+        printf("-------------------------------------------------------\n");
+        printf("Cuestionario %s\n",descCuestionario);
+        printf("Pregunta %s\n",pregunta.idPregunta);
+        printf("Opción número %d de %d\n",j,pregunta.cantOpciones);
+        printf("-------------------------------------------------------\n");
+        //copia el id del cuestionario, usuario y de la pregunta en la opcion
+        strcpy(opcion.idCuestionario,cuestionario.idCuestionario);
         strcpy(opcion.idPregunta,pregunta.idPregunta);
         strcpy(opcion.idUsuario,idUsuario);//copia el usuario
 
+        fflush(stdin);
         //pedir datos al usuario actual
         opcion.respuesta=j;
         printf("Ingrese el texto de la opción-->");
         gets(opcion.texto);
         fflush(stdin);
         do{
-           printf("Es esta la opción correcta de la pregunta? (1=Si, 0=No)-->");
-           scanf("%d",&opcion.correcta);
-           fflush(stdin);
+            printf("Es esta la opción correcta de la pregunta? (1=Si, 0=No)-->");
+            scanf("%d",&opcion.correcta);
+            fflush(stdin);
         } while(!(opcion.correcta==1 || opcion.correcta==0));//Repetir hasta que sea 1 o 0
         //Escribir la pregunta en el archivo
         fwrite(&opcion, sizeof(opcion),1,f);
@@ -69,24 +75,7 @@ int agregarPreguntas(char idCuestionario[10],char descCuestionario[100],char idU
         printf("Registro guardado\n");
         system("pause");
         system("cls");
-
     }
-
-    f = fopen("Cuestionarios.txt","r+");
-
-    i=0;
-    while(fread(&cuestionario,sizeof(struct Cuestionario),1,f)){
-        if(strcmp(idCuestionario,cuestionario.idCuestionario)==0 && strcmp(idUsuario,pregunta.idUsuario)==0){
-            cuestionario.cantPreg = cuestionario.cantPreg+1;
-            fseek(f,i*sizeof(cuestionario),SEEK_SET);
-            //Escribe el cuestionario modificado en esa posición
-            fwrite(&cuestionario,sizeof(cuestionario),1,f);
-            printf("Cuestionario modificado!\n");
-            break;
-        }
-        i++;
-    }
-    fclose(f);
 
     return 0;
 }

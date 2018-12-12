@@ -28,23 +28,23 @@ int testdata(){
 
     fclose(f);
 
-    struct Pregunta pregunta11 = {"01","001","Cuanto es 4 + 9?", 3, 20,"0000123"};
-    struct Pregunta pregunta12 = {"01","002","Cuanto es 14 + 7?", 3, 20,"0000123"};
-    struct Pregunta pregunta13 = {"01","003","Cuanto es 23 + 5?", 3, 20,"0000123"};
-    struct Pregunta pregunta14 = {"01","004","Cuanto es 27 + 12?", 3, 20,"0000123"};
-    struct Pregunta pregunta15 = {"01","005","Cuanto es 28 + 19?", 3, 20,"0000123"};
+    struct Pregunta pregunta11 = {"01","001","Cuanto es 4 + 9?", 5, 20,"0000123"};
+    struct Pregunta pregunta12 = {"01","002","Cuanto es 14 + 7?", 5, 20,"0000123"};
+    struct Pregunta pregunta13 = {"01","003","Cuanto es 23 + 5?", 5, 20,"0000123"};
+    struct Pregunta pregunta14 = {"01","004","Cuanto es 27 + 12?", 5, 20,"0000123"};
+    struct Pregunta pregunta15 = {"01","005","Cuanto es 28 + 19?", 5, 20,"0000123"};
 
-    struct Pregunta pregunta21 = {"02","001","Cuanto es 4 * 9?", 3, 20,"0000123"};
-    struct Pregunta pregunta22 = {"02","002","Cuanto es 14 * 7?", 3, 20,"0000123"};
-    struct Pregunta pregunta23 = {"02","003","Cuanto es 23 * 5?", 3, 20,"0000123"};
-    struct Pregunta pregunta24 = {"02","004","Cuanto es 27 * 12?", 3, 20,"0000123"};
-    struct Pregunta pregunta25 = {"02","005","Cuanto es 28 * 19?", 3, 20,"0000123"};
+    struct Pregunta pregunta21 = {"02","001","Cuanto es 4 * 9?", 5, 20,"0000123"};
+    struct Pregunta pregunta22 = {"02","002","Cuanto es 14 * 7?", 5, 20,"0000123"};
+    struct Pregunta pregunta23 = {"02","003","Cuanto es 23 * 5?", 5, 20,"0000123"};
+    struct Pregunta pregunta24 = {"02","004","Cuanto es 27 * 12?", 5, 20,"0000123"};
+    struct Pregunta pregunta25 = {"02","005","Cuanto es 28 * 19?", 5, 20,"0000123"};
 
-    struct Pregunta pregunta31 = {"03","001","Cuanto es 9 - 4?", 3, 20,"0000123"};
-    struct Pregunta pregunta32 = {"03","002","Cuanto es 14 - 7?", 3, 20,"0000123"};
-    struct Pregunta pregunta33 = {"03","003","Cuanto es 23 - 5?", 3, 20,"0000123"};
-    struct Pregunta pregunta34 = {"03","004","Cuanto es 27 - 12?", 3, 20,"0000123"};
-    struct Pregunta pregunta35 = {"03","005","Cuanto es 28 - 19?", 3, 20,"0000123"};
+    struct Pregunta pregunta31 = {"03","001","Cuanto es 9 - 4?", 5, 20,"0000123"};
+    struct Pregunta pregunta32 = {"03","002","Cuanto es 14 - 7?", 5, 20,"0000123"};
+    struct Pregunta pregunta33 = {"03","003","Cuanto es 23 - 5?", 5, 20,"0000123"};
+    struct Pregunta pregunta34 = {"03","004","Cuanto es 27 - 12?", 5, 20,"0000123"};
+    struct Pregunta pregunta35 = {"03","005","Cuanto es 28 - 19?", 5, 20,"0000123"};
 
     struct Pregunta pregunta41 = {"04","001","Venimos a clase _______ la mañana.", 3, 25,"0000123"};
     struct Pregunta pregunta42 = {"04","002","Tenemos dos libros _______.", 3, 25,"0000123"};

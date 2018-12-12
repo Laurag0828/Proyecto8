@@ -111,7 +111,7 @@ int agregarCuestionario(char idUsuario[25]){
                 printf("Es esta la opción correcta de la pregunta? (1=Si, 0=No)-->");
                 scanf("%d",&opcion.correcta);
                 fflush(stdin);
-            } while(!(cuestionario.activo==1 || cuestionario.activo==0));//Repetir hasta que sea 1 o 0
+            } while(!(opcion.correcta==1 || opcion.correcta==0));//Repetir hasta que sea 1 o 0
             //Escribir la pregunta en el archivo
             fwrite(&opcion, sizeof(opcion),1,f);
             fclose(f);
