@@ -43,6 +43,7 @@ int agregarOpciones(char idCuestionario[10],char descCuestionario[100],char idUs
 
     while(fread(&pregunta,sizeof(struct Pregunta),1,f)){
         if(strcmp(idPregunta,pregunta.idPregunta)==0 && strcmp(idCuestionario, pregunta.idCuestionario)==0 && strcmp(idUsuario,pregunta.idUsuario)==0){
+            pregunta.cantOpciones = pregunta.cantOpciones + 1;
             //Busca la posición del pregunta en el archivo
             fseek(f,i*sizeof(pregunta),SEEK_SET);
             //Escribe el pregunta modificado en esa posición

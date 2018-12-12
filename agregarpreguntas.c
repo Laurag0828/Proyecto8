@@ -11,6 +11,7 @@ int agregarPreguntas(char idCuestionario[10],char descCuestionario[100],char idU
     struct Cuestionario cuestionario; //Para manejo del cuestionario
     struct Pregunta pregunta; //Para manejo de la pregunta
     struct Opcion opcion; //Para manejo de la opcion
+    int i;//Ciclo para cuestionarios
     int j;//Variable ciclo de opciones
 
     //Abre el archivo de preguntas para agregar
@@ -76,6 +77,29 @@ int agregarPreguntas(char idCuestionario[10],char descCuestionario[100],char idU
         system("pause");
         system("cls");
     }
+
+    //Abre el archivo en modo lectura y escritura
+    f = fopen("Cuestionarios.txt","r+");
+
+
+    i=0; //Inicializa el contador de registros
+
+    //Ciclo para buscar el cuestionario
+    while(fread(&cuestionario,sizeof(struct Cuestionario),1,f)){//Lee el archivo con el tamaño de la  estructura Cuestionario
+        if(strcmp(idCuestionario,cuestionario.idCuestionario)==0 && strcmp(idUsuario,cuestionario.idUsuario)==0){
+            printf("Ingrese la nueva descripción-->");
+            cuestionario.cantPreg = cuestionario.cantPreg + 1;
+            //Busca la posición del cuestionario en el archivo
+            fseek(f,i*sizeof(cuestionario),SEEK_SET);
+            //Escribe el cuestionario modificado en esa posición
+            fwrite(&cuestionario,sizeof(cuestionario),1,f);
+            printf("Cuestionario modificado!\n");
+            break; //Finaliza la modificacion de cuestionario, termina el ciclo de busqueda
+        }
+        i++;//Si no lo encuentra aumenta la posicion a un registro mas
+    }
+    //Cerrar el archivo
+    fclose(f);
 
     return 0;
 }
