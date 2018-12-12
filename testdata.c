@@ -86,123 +86,123 @@ int testdata(){
 
     fclose(f);
 
-    struct Opcion opcion111 = {"01","001",'a',"15",0,"0000123"};
-    struct Opcion opcion112 = {"01","001",'b',"11",0,"0000123"};
-    struct Opcion opcion113 = {"01","001",'c',"13",1,"0000123"};
-    struct Opcion opcion114 = {"01","001",'d',"17",0,"0000123"};
-    struct Opcion opcion115 = {"01","001",'e',"49",0,"0000123"};
+    struct Opcion opcion111 = {"01","001",1,"15",0,"0000123"};
+    struct Opcion opcion112 = {"01","001",2,"11",0,"0000123"};
+    struct Opcion opcion113 = {"01","001",3,"13",1,"0000123"};
+    struct Opcion opcion114 = {"01","001",4,"17",0,"0000123"};
+    struct Opcion opcion115 = {"01","001",5,"49",0,"0000123"};
 
-    struct Opcion opcion121 = {"01","002",'a',"22",0,"0000123"};
-    struct Opcion opcion122 = {"01","002",'b',"19",0,"0000123"};
-    struct Opcion opcion123 = {"01","002",'c',"23",0,"0000123"};
-    struct Opcion opcion124 = {"01","002",'d',"21",1,"0000123"};
-    struct Opcion opcion125 = {"01","002",'e',"18",0,"0000123"};
+    struct Opcion opcion121 = {"01","002",1,"22",0,"0000123"};
+    struct Opcion opcion122 = {"01","002",2,"19",0,"0000123"};
+    struct Opcion opcion123 = {"01","002",3,"23",0,"0000123"};
+    struct Opcion opcion124 = {"01","002",4,"21",1,"0000123"};
+    struct Opcion opcion125 = {"01","002",5,"18",0,"0000123"};
 
-    struct Opcion opcion131 = {"01","003",'a',"28",1,"0000123"};
-    struct Opcion opcion132 = {"01","003",'b',"29",0,"0000123"};
-    struct Opcion opcion133 = {"01","003",'c',"23",0,"0000123"};
-    struct Opcion opcion134 = {"01","003",'d',"30",0,"0000123"};
-    struct Opcion opcion135 = {"01","003",'e',"32",0,"0000123"};
+    struct Opcion opcion131 = {"01","003",1,"28",1,"0000123"};
+    struct Opcion opcion132 = {"01","003",2,"29",0,"0000123"};
+    struct Opcion opcion133 = {"01","003",3,"23",0,"0000123"};
+    struct Opcion opcion134 = {"01","003",4,"30",0,"0000123"};
+    struct Opcion opcion135 = {"01","003",5,"32",0,"0000123"};
 
-    struct Opcion opcion141 = {"01","004",'a',"40",0,"0000123"};
-    struct Opcion opcion142 = {"01","004",'b',"41",0,"0000123"};
-    struct Opcion opcion143 = {"01","004",'c',"37",0,"0000123"};
-    struct Opcion opcion144 = {"01","004",'d',"39",1,"0000123"};
-    struct Opcion opcion145 = {"01","004",'e',"36",0,"0000123"};
+    struct Opcion opcion141 = {"01","004",1,"40",0,"0000123"};
+    struct Opcion opcion142 = {"01","004",2,"41",0,"0000123"};
+    struct Opcion opcion143 = {"01","004",3,"37",0,"0000123"};
+    struct Opcion opcion144 = {"01","004",4,"39",1,"0000123"};
+    struct Opcion opcion145 = {"01","004",5,"36",0,"0000123"};
 
-    struct Opcion opcion151 = {"01","005",'a',"40",0,"0000123"};
-    struct Opcion opcion152 = {"01","005",'b',"47",1,"0000123"};
-    struct Opcion opcion153 = {"01","005",'c',"44",0,"0000123"};
-    struct Opcion opcion154 = {"01","005",'d',"39",0,"0000123"};
-    struct Opcion opcion155 = {"01","005",'e',"52",0,"0000123"};
+    struct Opcion opcion151 = {"01","005",1,"40",0,"0000123"};
+    struct Opcion opcion152 = {"01","005",2,"47",1,"0000123"};
+    struct Opcion opcion153 = {"01","005",3,"44",0,"0000123"};
+    struct Opcion opcion154 = {"01","005",4,"39",0,"0000123"};
+    struct Opcion opcion155 = {"01","005",5,"52",0,"0000123"};
 
-    struct Opcion opcion211 = {"02","001",'a',"43",0,"0000123"};
-    struct Opcion opcion212 = {"02","001",'b',"41",0,"0000123"};
-    struct Opcion opcion213 = {"02","001",'c',"36",1,"0000123"};
-    struct Opcion opcion214 = {"02","001",'d',"34",0,"0000123"};
-    struct Opcion opcion215 = {"02","001",'e',"49",0,"0000123"};
+    struct Opcion opcion211 = {"02","001",1,"43",0,"0000123"};
+    struct Opcion opcion212 = {"02","001",2,"41",0,"0000123"};
+    struct Opcion opcion213 = {"02","001",3,"36",1,"0000123"};
+    struct Opcion opcion214 = {"02","001",4,"34",0,"0000123"};
+    struct Opcion opcion215 = {"02","001",5,"49",0,"0000123"};
 
-    struct Opcion opcion221 = {"02","002",'a',"92",0,"0000123"};
-    struct Opcion opcion222 = {"02","002",'b',"99",0,"0000123"};
-    struct Opcion opcion223 = {"02","002",'c',"93",0,"0000123"};
-    struct Opcion opcion224 = {"02","002",'d',"98",1,"0000123"};
-    struct Opcion opcion225 = {"02","002",'e',"88",0,"0000123"};
+    struct Opcion opcion221 = {"02","002",1,"92",0,"0000123"};
+    struct Opcion opcion222 = {"02","002",2,"99",0,"0000123"};
+    struct Opcion opcion223 = {"02","002",3,"93",0,"0000123"};
+    struct Opcion opcion224 = {"02","002",4,"98",1,"0000123"};
+    struct Opcion opcion225 = {"02","002",5,"88",0,"0000123"};
 
-    struct Opcion opcion231 = {"02","003",'a',"115",1,"0000123"};
-    struct Opcion opcion232 = {"02","003",'b',"105",0,"0000123"};
-    struct Opcion opcion233 = {"02","003",'c',"125",0,"0000123"};
-    struct Opcion opcion234 = {"02","003",'d',"145",0,"0000123"};
-    struct Opcion opcion235 = {"02","003",'e',"120",0,"0000123"};
+    struct Opcion opcion231 = {"02","003",1,"115",1,"0000123"};
+    struct Opcion opcion232 = {"02","003",2,"105",0,"0000123"};
+    struct Opcion opcion233 = {"02","003",3,"125",0,"0000123"};
+    struct Opcion opcion234 = {"02","003",4,"145",0,"0000123"};
+    struct Opcion opcion235 = {"02","003",5,"120",0,"0000123"};
 
-    struct Opcion opcion241 = {"02","004",'a',"314",0,"0000123"};
-    struct Opcion opcion242 = {"02","004",'b',"304",0,"0000123"};
-    struct Opcion opcion243 = {"02","004",'c',"334",0,"0000123"};
-    struct Opcion opcion244 = {"02","004",'d',"324",1,"0000123"};
-    struct Opcion opcion245 = {"02","004",'e',"364",0,"0000123"};
+    struct Opcion opcion241 = {"02","004",1,"314",0,"0000123"};
+    struct Opcion opcion242 = {"02","004",2,"304",0,"0000123"};
+    struct Opcion opcion243 = {"02","004",3,"334",0,"0000123"};
+    struct Opcion opcion244 = {"02","004",4,"324",1,"0000123"};
+    struct Opcion opcion245 = {"02","004",5,"364",0,"0000123"};
 
-    struct Opcion opcion251 = {"02","005",'a',"533",0,"0000123"};
-    struct Opcion opcion252 = {"02","005",'b',"513",1,"0000123"};
-    struct Opcion opcion253 = {"02","005",'c',"503",0,"0000123"};
-    struct Opcion opcion254 = {"02","005",'d',"523",0,"0000123"};
-    struct Opcion opcion255 = {"02","005",'e',"543",0,"0000123"};
+    struct Opcion opcion251 = {"02","005",1,"533",0,"0000123"};
+    struct Opcion opcion252 = {"02","005",2,"513",1,"0000123"};
+    struct Opcion opcion253 = {"02","005",3,"503",0,"0000123"};
+    struct Opcion opcion254 = {"02","005",4,"523",0,"0000123"};
+    struct Opcion opcion255 = {"02","005",5,"543",0,"0000123"};
 
-    struct Opcion opcion311 = {"03","001",'a',"6",0,"0000123"};
-    struct Opcion opcion312 = {"03","001",'b',"4",0,"0000123"};
-    struct Opcion opcion313 = {"03","001",'c',"5",1,"0000123"};
-    struct Opcion opcion314 = {"03","001",'d',"7",0,"0000123"};
-    struct Opcion opcion315 = {"03","001",'e',"8",0,"0000123"};
+    struct Opcion opcion311 = {"03","001",1,"6",0,"0000123"};
+    struct Opcion opcion312 = {"03","001",2,"4",0,"0000123"};
+    struct Opcion opcion313 = {"03","001",3,"5",1,"0000123"};
+    struct Opcion opcion314 = {"03","001",4,"7",0,"0000123"};
+    struct Opcion opcion315 = {"03","001",5,"8",0,"0000123"};
 
-    struct Opcion opcion321 = {"03","002",'a',"7",1,"0000123"};
-    struct Opcion opcion322 = {"03","002",'b',"9",0,"0000123"};
-    struct Opcion opcion323 = {"03","002",'c',"11",0,"0000123"};
-    struct Opcion opcion324 = {"03","002",'d',"8",0,"0000123"};
-    struct Opcion opcion325 = {"03","002",'e',"10",0,"0000123"};
+    struct Opcion opcion321 = {"03","002",1,"7",1,"0000123"};
+    struct Opcion opcion322 = {"03","002",2,"9",0,"0000123"};
+    struct Opcion opcion323 = {"03","002",3,"11",0,"0000123"};
+    struct Opcion opcion324 = {"03","002",4,"8",0,"0000123"};
+    struct Opcion opcion325 = {"03","002",5,"10",0,"0000123"};
 
-    struct Opcion opcion331 = {"03","003",'a',"17",0,"0000123"};
-    struct Opcion opcion332 = {"03","003",'b',"19",0,"0000123"};
-    struct Opcion opcion333 = {"03","003",'c',"21",0,"0000123"};
-    struct Opcion opcion334 = {"03","003",'d',"18",1,"0000123"};
-    struct Opcion opcion335 = {"03","003",'e',"20",0,"0000123"};
+    struct Opcion opcion331 = {"03","003",1,"17",0,"0000123"};
+    struct Opcion opcion332 = {"03","003",2,"19",0,"0000123"};
+    struct Opcion opcion333 = {"03","003",3,"21",0,"0000123"};
+    struct Opcion opcion334 = {"03","003",4,"18",1,"0000123"};
+    struct Opcion opcion335 = {"03","003",5,"20",0,"0000123"};
 
-    struct Opcion opcion341 = {"03","004",'a',"16",0,"0000123"};
-    struct Opcion opcion342 = {"03","004",'b',"19",0,"0000123"};
-    struct Opcion opcion343 = {"03","004",'c',"18",0,"0000123"};
-    struct Opcion opcion344 = {"03","004",'d',"15",1,"0000123"};
-    struct Opcion opcion345 = {"03","004",'e',"17",0,"0000123"};
+    struct Opcion opcion341 = {"03","004",1,"16",0,"0000123"};
+    struct Opcion opcion342 = {"03","004",2,"19",0,"0000123"};
+    struct Opcion opcion343 = {"03","004",3,"18",0,"0000123"};
+    struct Opcion opcion344 = {"03","004",4,"15",1,"0000123"};
+    struct Opcion opcion345 = {"03","004",5,"17",0,"0000123"};
 
-    struct Opcion opcion351 = {"03","005",'a',"10",0,"0000123"};
-    struct Opcion opcion352 = {"03","005",'b',"9",1,"0000123"};
-    struct Opcion opcion353 = {"03","005",'c',"14",0,"0000123"};
-    struct Opcion opcion354 = {"03","005",'d',"7",0,"0000123"};
-    struct Opcion opcion355 = {"03","005",'e',"11",0,"0000123"};
+    struct Opcion opcion351 = {"03","005",1,"10",0,"0000123"};
+    struct Opcion opcion352 = {"03","005",2,"9",1,"0000123"};
+    struct Opcion opcion353 = {"03","005",3,"14",0,"0000123"};
+    struct Opcion opcion354 = {"03","005",4,"7",0,"0000123"};
+    struct Opcion opcion355 = {"03","005",5,"11",0,"0000123"};
 
-    struct Opcion opcion411 = {"04","001",'a',"por",1,"0000123"};
-    struct Opcion opcion412 = {"04","001",'b',"de",0,"0000123"};
-    struct Opcion opcion413 = {"04","001",'c',"en",0,"0000123"};
+    struct Opcion opcion411 = {"04","001",1,"por",1,"0000123"};
+    struct Opcion opcion412 = {"04","001",2,"de",0,"0000123"};
+    struct Opcion opcion413 = {"04","001",3,"en",0,"0000123"};
 
-    struct Opcion opcion421 = {"04","002",'a',"azules",1,"0000123"};
-    struct Opcion opcion422 = {"04","002",'b',"azul",0,"0000123"};
-    struct Opcion opcion423 = {"04","002",'c',"blanca",0,"0000123"};
+    struct Opcion opcion421 = {"04","002",1,"azules",1,"0000123"};
+    struct Opcion opcion422 = {"04","002",2,"azul",0,"0000123"};
+    struct Opcion opcion423 = {"04","002",3,"blanca",0,"0000123"};
 
-    struct Opcion opcion431 = {"04","003",'a',"gusto",0,"0000123"};
-    struct Opcion opcion432 = {"04","003",'b',"gustan",1,"0000123"};
-    struct Opcion opcion433 = {"04","003",'c',"gusta",0,"0000123"};
+    struct Opcion opcion431 = {"04","003",1,"gusto",0,"0000123"};
+    struct Opcion opcion432 = {"04","003",2,"gustan",1,"0000123"};
+    struct Opcion opcion433 = {"04","003",3,"gusta",0,"0000123"};
 
-    struct Opcion opcion441 = {"04","004",'a',"Quién",0,"0000123"};
-    struct Opcion opcion442 = {"04","004",'b',"Cuántos",1,"0000123"};
-    struct Opcion opcion443 = {"04","004",'c',"Dónde",0,"0000123"};
+    struct Opcion opcion441 = {"04","004",1,"Quién",0,"0000123"};
+    struct Opcion opcion442 = {"04","004",2,"Cuántos",1,"0000123"};
+    struct Opcion opcion443 = {"04","004",3,"Dónde",0,"0000123"};
 
-    struct Opcion opcion511 = {"05","001",'a',"1946",0,"0000123"};
-    struct Opcion opcion512 = {"05","001",'b',"1944",0,"0000123"};
-    struct Opcion opcion513 = {"05","001",'c',"1945",1,"0000123"};
+    struct Opcion opcion511 = {"05","001",1,"1946",0,"0000123"};
+    struct Opcion opcion512 = {"05","001",2,"1944",0,"0000123"};
+    struct Opcion opcion513 = {"05","001",3,"1945",1,"0000123"};
 
-    struct Opcion opcion521 = {"05","002",'a',"1969",1,"0000123"};
-    struct Opcion opcion522 = {"05","002",'b',"1968",0,"0000123"};
-    struct Opcion opcion523 = {"05","002",'c',"1971",0,"0000123"};
+    struct Opcion opcion521 = {"05","002",1,"1969",1,"0000123"};
+    struct Opcion opcion522 = {"05","002",2,"1968",0,"0000123"};
+    struct Opcion opcion523 = {"05","002",3,"1971",0,"0000123"};
 
-    struct Opcion opcion531 = {"05","003",'a',"1912",0,"0000123"};
-    struct Opcion opcion532 = {"05","003",'b',"1914",1,"0000123"};
-    struct Opcion opcion533 = {"05","003",'c',"1916",0,"0000123"};
+    struct Opcion opcion531 = {"05","003",1,"1912",0,"0000123"};
+    struct Opcion opcion532 = {"05","003",2,"1914",1,"0000123"};
+    struct Opcion opcion533 = {"05","003",3,"1916",0,"0000123"};
 
 
     f=fopen("Opciones.txt","a");
