@@ -5,9 +5,9 @@
 #include "Preguntas.h"//Incluir el dato de tipo Pregunta
 #include "Opciones.h"//Incluir el dato de tipo Opcion
 
-int manejoPreguntas(char id[25],char idCuestionario[10]); //Prototipo funcion manejo de preguntas
+int manejoPreguntas(char idUsuario[25],char idCuestionario[10],char descCuestionario[100]); //Prototipo funcion manejo de preguntas
 
-int agregarCuestionario(){
+int agregarCuestionario(char idUsuario[25]){
 
     FILE *f; //Apuntador para abrir archivos
     struct Cuestionario cuestionario; //Para manejo del cuestionario
@@ -24,6 +24,7 @@ int agregarCuestionario(){
     printf("-------------------------------------------------------\n");
     printf("Ingresando nuevo cuestionario\n");
     printf("-------------------------------------------------------\n");
+    strcpy(cuestionario.idUsuario,idUsuario);//copia el usuario
     //pedir datos al usuario actual
     printf("Ingrese el id del cuestionario-->");
     scanf("%s",cuestionario.idCuestionario);
@@ -61,6 +62,8 @@ int agregarCuestionario(){
         printf("-------------------------------------------------------\n");
         //copia el id del cuestionario en la pregunta
         strcpy(pregunta.idCuestionario,cuestionario.idCuestionario);
+        strcpy(pregunta.idUsuario,idUsuario);//copia el usuario
+        fflush(stdin);
         //pedir datos al usuario actual
         printf("Ingrese el id de la pregunta-->");
         scanf("%s",pregunta.idPregunta);
@@ -82,23 +85,25 @@ int agregarCuestionario(){
         system("pause");
         system("cls");
 
-        //Una vez guardado el cuestionario, agrega las preguntas
+        //Una vez guardada la pregunta, agrega las opciones
 
         //Ciclo para agragar las opciones de esta pregunta
         for(j=1;j<=pregunta.cantOpciones;j++){
             //Abre el archivo de preguntas para agregar
             f = fopen("Opciones.txt","a");
             printf("-------------------------------------------------------\n");
+            printf("Cuestionario %s\n",cuestionario.idCuestionario);
             printf("Pregunta %s\n",pregunta.texto);
             printf("Opción número %d de %d\n",j,pregunta.cantOpciones);
             printf("-------------------------------------------------------\n");
-            //copia el id del cuestionario y de la pregunta en la opcion
+            //copia el id del cuestionario, usuario y de la pregunta en la opcion
             strcpy(opcion.idCuestionario,cuestionario.idCuestionario);
             strcpy(opcion.idPregunta,pregunta.idPregunta);
-            //pedir datos al usuario actual
-            printf("Ingrese el caracter de la opción-->");
-            scanf("%c",&opcion.opcion);
+            strcpy(opcion.idUsuario,idUsuario);//copia el usuario
+
             fflush(stdin);
+            //pedir datos al usuario actual
+            opcion.respuesta=j;
             printf("Ingrese el texto de la opción-->");
             gets(opcion.texto);
             fflush(stdin);
@@ -124,7 +129,7 @@ int agregarCuestionario(){
 }
 
 
-int activarCuestionario(){
+int activarCuestionario(char idUsuario[25]){
 
     FILE *f; //Apuntador para abrir archivos
     struct Cuestionario cuestionario; //Para manejo del cuestionario
@@ -146,7 +151,7 @@ int activarCuestionario(){
 
     //Ciclo para buscar el cuestionario
     while(fread(&cuestionario,sizeof(struct Cuestionario),1,f)){//Lee el archivo con el tamaño de la  estructura Cuestionario
-        if(strcmp(idCuestionario,cuestionario.idCuestionario)==0){
+        if(strcmp(idCuestionario,cuestionario.idCuestionario)==0 && strcmp(idUsuario,cuestionario.idUsuario)==0){
             //Si encuentra el cuestionario pregunta si va a activarlo
             do{
                 printf("Desea activar este cuestionario? (1=Si, 2=No)-->");
@@ -180,7 +185,7 @@ int activarCuestionario(){
     return 0;
 }
 
-int desactivarCuestionario(){
+int desactivarCuestionario(char idUsuario[25]){
 
     FILE *f; //Apuntador para abrir archivos
     struct Cuestionario cuestionario; //Para manejo del cuestionario
@@ -202,7 +207,7 @@ int desactivarCuestionario(){
 
     //Ciclo para buscar el cuestionario
     while(fread(&cuestionario,sizeof(struct Cuestionario),1,f)){//Lee el archivo con el tamaño de la  estructura Cuestionario
-        if(strcmp(idCuestionario,cuestionario.idCuestionario)==0){
+        if(strcmp(idCuestionario,cuestionario.idCuestionario)==0 && strcmp(idUsuario,cuestionario.idUsuario)==0){
             //Si encuentra el cuestionario pregunta si va a desactivarlo
             do{
                 printf("Desea desactivar este cuestionario? (1=Si, 2=No)-->");
@@ -237,7 +242,7 @@ int desactivarCuestionario(){
 }
 
 
-int modificarCuestionario(){
+int modificarCuestionario(char idUsuario[25]){
 
     FILE *f; //Apuntador para abrir archivos
     struct Cuestionario cuestionario; //Para manejo del cuestionario
@@ -259,7 +264,7 @@ int modificarCuestionario(){
 
     //Ciclo para buscar el cuestionario
     while(fread(&cuestionario,sizeof(struct Cuestionario),1,f)){//Lee el archivo con el tamaño de la  estructura Cuestionario
-        if(strcmp(idCuestionario,cuestionario.idCuestionario)==0){
+        if(strcmp(idCuestionario,cuestionario.idCuestionario)==0 && strcmp(idUsuario,cuestionario.idUsuario)==0){
             //Si encuentra el cuestionario pregunta si va a desactivarlo
             do{
                 printf("\n\nId: %s", cuestionario.idCuestionario);
@@ -303,7 +308,7 @@ int modificarCuestionario(){
 }
 
 
-int gestionarCuestionario(char id[25]){
+int gestionarCuestionario(char idUsuario[25]){
 
     FILE *f; //Apuntador para abrir archivos
     struct Cuestionario cuestionario; //Para manejo del cuestionario
@@ -325,7 +330,7 @@ int gestionarCuestionario(char id[25]){
 
     //Ciclo para buscar el cuestionario
     while(fread(&cuestionario,sizeof(struct Cuestionario),1,f)){//Lee el archivo con el tamaño de la  estructura Cuestionario
-        if(strcmp(idCuestionario,cuestionario.idCuestionario)==0){
+        if(strcmp(idCuestionario,cuestionario.idCuestionario)==0 && strcmp(idUsuario,cuestionario.idUsuario)==0){
             //Si encuentra el cuestionario pregunta si va a desactivarlo
             do{
                 printf("Desea gestionar este cuestionario? (1=Si, 2=No)-->");
@@ -335,7 +340,7 @@ int gestionarCuestionario(char id[25]){
 
             if(respuesta==1){
                 system("cls");
-                manejoPreguntas(id,cuestionario.idCuestionario);
+                manejoPreguntas(idUsuario,cuestionario.idCuestionario,cuestionario.descripcion);
             }
             else{
                 printf("Acción cancelada!!!\n");
@@ -347,16 +352,16 @@ int gestionarCuestionario(char id[25]){
     }
     if(encontrado==0){//Si la variable de control esta en cero significa que no encontró el cuestionario en el archivo
         printf("----El cuestionario %s no está registrado -----\n",idCuestionario);
+        system("pause");
     }
     //Cerrar el archivo
     fclose(f);
-    system("pause");
     system("cls");
     return 0;
 }
 
 
-int listarCuestionario(){
+int listarCuestionario(char idUsuario[25]){
     FILE *f; //Apuntador para abrir archivos
     struct Cuestionario cuestionario; //Para manejo del cuestionario
     //consulta todos los cuestionarios
@@ -367,7 +372,9 @@ int listarCuestionario(){
     f = fopen("Cuestionarios.txt","r");
     printf("%-10s%-60s%-20s%10s%10s\n","Id","Descripcion","Asignatura","No. preguntas","Activo");
     while(fread(&cuestionario,sizeof(struct Cuestionario),1,f)){//Lee el archivo con el tamaño de la  estructura Cuestionario
-        printf("%-10s%-60s%-20s%10d%10d\n",cuestionario.idCuestionario,cuestionario.descripcion,cuestionario.asignatura,cuestionario.cantPreg,cuestionario.activo);
+        if(strcmp(idUsuario,cuestionario.idUsuario)==0){
+            printf("%-10s%-60s%-20s%10d%10d\n",cuestionario.idCuestionario,cuestionario.descripcion,cuestionario.asignatura,cuestionario.cantPreg,cuestionario.activo);
+        }
     }
     //Cierra el archivo
     fclose(f);

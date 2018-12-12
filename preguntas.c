@@ -8,32 +8,31 @@ Archivo fuente para el manejo de preguntas
 ***/
 
 //Prototipos de funciones
-int listarPreguntas(char idCuestionario[10]);
-int agregarPreguntas(char idCuestionario[10]);
-int modificarPreguntas(char idCuestionario[10]);
-int eliminarPreguntas(char idCuestionario[10]);
+int listarPreguntas(char idCuestionario[10],char descCuestionario[100],char idUsuario[25]);
+int agregarPreguntas(char idCuestionario[10],char descCuestionario[100],char idUsuario[25]);
+int modificarPreguntas(char idCuestionario[10],char descCuestionario[100],char idUsuario[25]);
 
-int manejoOpciones(char id[25],char idCuestionario[10],char idPregunta[10]); //Prototipo funcion manejo de preguntas
+int manejoOpciones(char idUsuario[25],char idCuestionario[10],char descCuestionario[100], char idPregunta[10]); //Prototipo funcion manejo de opciones
 
-int manejoPreguntas(char id[25],char idCuestionario[10])
+int manejoPreguntas(char idUsuario[25],char idCuestionario[10],char descCuestionario[100])
 {
     //Variable para el control del menu de preguntas
     int opcionPreguntas;
+    //Variable para pedir id de preguntas
+    char idPregunta[10];
 
     //Ciclo do...while para repetir el menu hasta que se selecciona 9 para salir al menu de cuestionario
     do{
         printf("---------------------------------------------------------------\n");
         printf("Sistema de evaluaciones ISI - UCA - Manejo de preguntas\n");
-        printf("%s %s\n","Cuestionario actual: ", idCuestionario);
-        printf("%s %s\n","Usuario actual: ", id);
+        printf("%s %s\n","Cuestionario actual: ", descCuestionario);
+        printf("%s %s\n","Usuario actual: ", idUsuario);
         printf("---------------------------------------------------------------\n");
         printf("[1] Listar preguntas de este cuestionario\n");
         printf("[2] Agregar pregunta\n");
         printf("[3] Modificar pregunta\n");
-        printf("[4] Eliminar pregunta\n");
-        printf("[5] Gestionar opciones de una pregunta\n");
-
-        printf("9. Regresar a menú cuestionarios\n");
+        printf("[4] Gestionar opciones de una pregunta\n");
+        printf("[9] Regresar a menú cuestionarios\n");
 
         printf("-------------------------------------------------------\n");
         printf("Su selección-->");
@@ -43,23 +42,21 @@ int manejoPreguntas(char id[25],char idCuestionario[10])
         switch(opcionPreguntas){
         case 1:
             //Presenta una lista de todos los preguntas en este cuestionario
-            listarPreguntas(idCuestionario);
+            listarPreguntas(idCuestionario,descCuestionario,idUsuario);
             break;
         case 2:
             //Agrega un pregunta nueva en el cuestionario
-            agregarPreguntas(idCuestionario);
+            agregarPreguntas(idCuestionario,descCuestionario,idUsuario);
             break;
         case 3:
             //Modifica los datos de la pregunta
-            modificarPreguntas(idCuestionario);
+            modificarPreguntas(idCuestionario,descCuestionario,idUsuario);
             break;
         case 4:
-            //Elimina un pregunta
-            eliminarPreguntas(idCuestionario);
-            break;
-        case 5:
             //Llama a la funcion para gestionar las opciones de una pregunta
-            manejoOpciones(id,"0001","00001");
+            printf("Ingrese la pregunta que va a gestionar-->");
+            scanf("%s",idPregunta);
+            manejoOpciones(idUsuario,idCuestionario,descCuestionario,idPregunta);
             break;
         case 9:
             printf("Regresando a la pantalla de cuestionarios...\n");

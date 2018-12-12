@@ -6,7 +6,7 @@
 
 
 //Función modificar preguntas
-int modificarPreguntas(char idCuestionario[10]){
+int modificarPreguntas(char idCuestionario[10],char descCuestionario[100],char idUsuario[25]){
 
     char idPregunta[20];
     int i; //Contador para encontrar la posicion de la pregunta en el archivo
@@ -20,6 +20,7 @@ int modificarPreguntas(char idCuestionario[10]){
     f = fopen("Preguntas.txt","r+");
     printf("-------------------------------------------------------\n");
     printf("Modificar una pregunta\n");
+    printf("Cuestionario %s\n", descCuestionario);
     printf("-------------------------------------------------------\n");
     //pedir datos del usuario a buscar
     printf("Ingrese el id de la pregunta a buscar-->");
@@ -34,7 +35,7 @@ int modificarPreguntas(char idCuestionario[10]){
 
 
     while(fread(&pregunta,sizeof(struct Pregunta),1,f)){//Lee el archivo con el tamaño de la  estructura Pregunta
-        if(strcmp(idPregunta,pregunta.idPregunta)==0){
+        if(strcmp(idPregunta,pregunta.idPregunta)==0 && strcmp(idCuestionario, pregunta.idCuestionario)==0 && strcmp(idUsuario,pregunta.idUsuario)==0){
            do{
                 printf("\n\nId: %s", pregunta.idPregunta);
                 printf("\nDescripción: %s\n\n", pregunta.texto);

@@ -8,8 +8,11 @@ Archivo fuente para el manejo de opciones
 
 ***/
 
+int listarOpciones(char idCuestionario[10],char descCuestionario[100],char idUsuario[25],char idPregunta[10]);
+int agregarOpciones(char idCuestionario[10],char descCuestionario[100],char idUsuario[25],char idPregunta[10]);
+int modificarOpciones(char idCuestionario[10],char descCuestionario[100],char idUsuario[25],char idPregunta[10]);
 
-int manejoOpciones(char id[25],char idCuestionario[10],char idPregunta[10])
+int manejoOpciones(char idUsuario[25],char idCuestionario[10],char descCuestionario[100],char idPregunta[10])
 {
     //Variable para el control del menu de opciones
     int opcionOpciones;
@@ -18,15 +21,14 @@ int manejoOpciones(char id[25],char idCuestionario[10],char idPregunta[10])
     do{
         printf("---------------------------------------------------------------\n");
         printf("Sistema de evaluaciones ISI - UCA - Manejo de opciones\n");
-        printf("%s %s\n","Cuestionario actual: ", idCuestionario);
+        printf("%s %s\n","Cuestionario actual: ", descCuestionario);
         printf("%s %s\n","Pregunta actual: ", idPregunta);
-        printf("%s %s\n","Usuario actual: ", id);
+        printf("%s %s\n","Usuario actual: ", idUsuario);
         printf("---------------------------------------------------------------\n");
-        printf("1. Agregar opción\n");
-        printf("2. Modificar opción\n");
-        printf("3. Desactivar opción\n");
-        printf("4. Listar opciones de esta pregunta\n");
-        printf("9. Regresar a menú preguntas\n");
+        printf("[1] Listar opciones de esta pregunta\n");
+        printf("[2] Agregar opción\n");
+        printf("[3] Modificar opción\n");
+        printf("[9] Regresar a menú preguntas\n");
 
         printf("-------------------------------------------------------\n");
         printf("Su selección-->");
@@ -35,17 +37,16 @@ int manejoOpciones(char id[25],char idCuestionario[10],char idPregunta[10])
 
         switch(opcionOpciones){
         case 1:
-            //Agrega una opcion nueva en la pregunta
+            //Presenta una lista de todos los opciones en esta pregunta
+            listarOpciones(idCuestionario,descCuestionario,idUsuario,idPregunta);
             break;
         case 2:
-            //Modifica los datos de la opcion
-
+            //Agrega una opcion nueva en la pregunta
+            agregarOpciones(idCuestionario,descCuestionario,idUsuario,idPregunta);
             break;
         case 3:
-            //Desactiva una opcion
-            break;
-        case 4:
-            //Presenta una lista de todos los opciones en esta pregunta
+            //Modifica los datos de la opcion
+            modificarOpciones(idCuestionario,descCuestionario,idUsuario,idPregunta);
             break;
         case 9:
             printf("Regresando a la pantalla de preguntas...\n");

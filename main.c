@@ -8,7 +8,7 @@ int manejoCuestionarios(char id[25]); //Prototipo funcion manejo de cuestionario
 int responderCuestionario(char id[25]); //Prototipo funcion para responder cuestionarios
 int manejoReportes(char id[25]); //Prototipo funcion para presentar menu de reportes
 int cambiarContrasenia(char id[25]); //Prototipo funcion para cambiar contraseña
-
+int testdata();//Funcion para llenar de valores de prueba los archivos
 
 
 /*Programa principal, maneja el menu principal del sistema*/
@@ -131,6 +131,9 @@ int main()
                                     break;
                                 case 5:
                                     cambiarContrasenia(usuarioLogeado.id);
+                                    break;
+                                case 8:
+                                    testdata();
                                     break;
                                 case 9:
                                     //Sale del sistema (evaluacion en el while)

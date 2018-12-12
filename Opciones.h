@@ -12,9 +12,10 @@ struct Opcion
 {
     char idCuestionario[10];
     char idPregunta[10];
-    char opcion; //caracter que se almacenara como respuesta
-    char texto[500]; //Texto que se presenta en pantalla
+    int respuesta; //numero que se almacenara como respuesta
+    char texto[100]; //Texto que se presenta en pantalla
     int correcta; //Indica si la opcion es la respuesta correcta a la pregunta 1 es Si 0 es No
+    char idUsuario[25];
 } ;
 
 

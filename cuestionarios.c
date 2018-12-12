@@ -7,14 +7,14 @@ Archivo fuente para el manejo de cuestionarios
 
 ***/
 
-int agregarCuestionario(); //Prototipo de funcion para crear cuestionarios
-int activarCuestionario(); //Prototipo de funcion para activar Cuestionarios
-int desactivarCuestionario(); //Prototipo de funcion para desactivar Cuestionarios
-int modificarCuestionario(); //Prototipo de funcion para modificar Cuestionarios
-int gestionarCuestionario(char id[25]); //Prototipo de funcion para llamar a la gestion del cuestionario
-int listarCuestionario(); //Prototipo de funcion para listar cuestionariosactivarCuestionario
+int agregarCuestionario(char idUsuario[25]); //Prototipo de funcion para crear cuestionarios
+int activarCuestionario(char idUsuario[25]); //Prototipo de funcion para activar Cuestionarios
+int desactivarCuestionario(char idUsuario[25]); //Prototipo de funcion para desactivar Cuestionarios
+int modificarCuestionario(char idUsuario[25]); //Prototipo de funcion para modificar Cuestionarios
+int gestionarCuestionario(char idUsuario[25]); //Prototipo de funcion para llamar a la gestion del cuestionario
+int listarCuestionario(char idUsuario[25]); //Prototipo de funcion para listar cuestionariosactivarCuestionario
 
-int manejoCuestionarios(char id[25])
+int manejoCuestionarios(char idUsuario[25])
 {
     //Variable para el control del menu de cuestionarios
     int opcionCuestionarios;
@@ -23,7 +23,7 @@ int manejoCuestionarios(char id[25])
     do{
         printf("---------------------------------------------------------------\n");
         printf("Sistema de evaluaciones ISI - UCA - Manejo de cuestionarios\n");
-        printf("%s %s\n","Usuario actual: ", id);
+        printf("%s %s\n","Usuario actual: ", idUsuario);
         printf("---------------------------------------------------------------\n");
         printf("[1] Listar cuestionarios\n");
         printf("[2] Agregar cuestionario\n");
@@ -41,27 +41,27 @@ int manejoCuestionarios(char id[25])
         switch(opcionCuestionarios){
         case 1:
             //Presenta una lista de todos los cuestionarios
-            listarCuestionario();
+            listarCuestionario(idUsuario);
             break;
         case 2:
             //Agrega un cuestionario nuevo en el sistema
-            agregarCuestionario();
+            agregarCuestionario(idUsuario);
             break;
         case 3:
             //Activar un cuestionario
-            activarCuestionario();
+            activarCuestionario(idUsuario);
             break;
         case 4:
             //Desactivar un cuestionario
-            desactivarCuestionario();
+            desactivarCuestionario(idUsuario);
             break;
         case 5:
             //Modificar un cuestionario
-            modificarCuestionario();
+            modificarCuestionario(idUsuario);
             break;
         case 6:
             //Llama a la funcion para gestionar las preguntas de un cuestionario
-            gestionarCuestionario(id);
+            gestionarCuestionario(idUsuario);
             break;
         case 9:
             printf("Regresando a la pantalla principal...\n");

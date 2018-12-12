@@ -6,7 +6,7 @@
 
 
 
-int listarPreguntas(char idCuestionario[10])
+int listarPreguntas(char idCuestionario[10],char descCuestionario[100],char idUsuario[25])
 {
     FILE *f;
     struct Pregunta pregunta;
@@ -14,14 +14,14 @@ int listarPreguntas(char idCuestionario[10])
     f = fopen("Preguntas.txt","r");
 
     printf("-------------------------------------------------------------------\n");
-    printf("Listado de preguntas en el cuestionario %s\n", idCuestionario);
+    printf("Listado de preguntas en el cuestionario %s\n", descCuestionario);
     printf("-------------------------------------------------------------------\n");
 
-    printf("%-10s%-10s%-60s%-10s%-10s\n","Cuest","Id","Descripción","Opciones","Puntaje");
+    printf("%-10s%-60s%-10s%-10s\n","Id","Descripción","Opciones","Puntaje");
 
     while(fread(&pregunta,sizeof(struct Pregunta),1,f)){//Lee el archivo con el tamaño de la  estructura Pregunta
-        if (strcmp(idCuestionario, pregunta.idCuestionario)==0){
-            printf("%-10s%-10s%-60s%-10d%-10d\n",pregunta.idCuestionario,pregunta.idPregunta,pregunta.texto,pregunta.cantOpciones,pregunta.puntos);
+        if (strcmp(idCuestionario, pregunta.idCuestionario)==0 && strcmp(idUsuario,pregunta.idUsuario)==0){
+            printf("%-10s%-60s%-10d%-10d\n",pregunta.idPregunta,pregunta.texto,pregunta.cantOpciones,pregunta.puntos);
         }
     }
     //Cierra el archivo
