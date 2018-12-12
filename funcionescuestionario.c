@@ -2,8 +2,6 @@
 #include <locale.h>//Para presentar caracteres en español
 #include <windows.h>//Para usar la funcion Sleep
 #include "Cuestionarios.h"//Incluir el dato de tipo Cuestionario
-#include "Preguntas.h"//Incluir el dato de tipo Pregunta
-#include "Opciones.h"//Incluir el dato de tipo Opcion
 
 int manejoPreguntas(char idUsuario[25],char idCuestionario[10],char descCuestionario[100]); //Prototipo funcion manejo de preguntas
 
@@ -11,11 +9,6 @@ int agregarCuestionario(char idUsuario[25]){
 
     FILE *f; //Apuntador para abrir archivos
     struct Cuestionario cuestionario; //Para manejo del cuestionario
-    struct Pregunta pregunta; //Para manejo de la pregunta
-    struct Opcion opcion; //Para manejo de la opcion
-    int i;//Ciclo para preguntas
-    int j;//Ciclo para opciones
-    int totalPuntos=0; //total de puntos de un cuestionario
 
     //Abre el archivo para agregar
     f = fopen("Cuestionarios.txt","a");
@@ -35,9 +28,7 @@ int agregarCuestionario(char idUsuario[25]){
     printf("Ingrese la asignatura-->");
     gets(cuestionario.asignatura);
     fflush(stdin);
-    printf("Ingrese la cantidad de preguntas-->");
-    scanf("%d",&cuestionario.cantPreg);
-    fflush(stdin);
+    cuestionario.cantPreg=0;
     do{
         printf("Quiere dejar este cuestionario activo para responder? (1=Si, 0=No)-->");
         scanf("%d",&cuestionario.activo);
@@ -46,83 +37,9 @@ int agregarCuestionario(char idUsuario[25]){
     //Escribir al cuestionario en el archivo
     fwrite(&cuestionario, sizeof(cuestionario),1,f);
     fclose(f);
-    printf("Registro guardado, ahora agregaremos las preguntas de este cuestionario\n");
+    printf("Registro guardado, para agregar las preguntas de este cuestionario, vaya al menú 'Gestionar preguntas de un cuestionario'\n");
+    printf("y luego seleccione 'Agregar pregunta'\n");
     system("pause");
-    system("cls");
-
-    //Una vez guardado el cuestionario, agrega las preguntas
-
-    //Ciclo para agragar las preguntas de este cuestionario
-    for(i=1;i<=cuestionario.cantPreg;i++){
-        //Abre el archivo de preguntas para agregar
-        f = fopen("Preguntas.txt","a");
-        printf("-------------------------------------------------------\n");
-        printf("Pregunta número %d de %d\n",i,cuestionario.cantPreg);
-        printf("Total de puntos %d\n",totalPuntos);
-        printf("-------------------------------------------------------\n");
-        //copia el id del cuestionario en la pregunta
-        strcpy(pregunta.idCuestionario,cuestionario.idCuestionario);
-        strcpy(pregunta.idUsuario,idUsuario);//copia el usuario
-        fflush(stdin);
-        //pedir datos al usuario actual
-        printf("Ingrese el id de la pregunta-->");
-        scanf("%s",pregunta.idPregunta);
-        fflush(stdin);
-        printf("Ingrese el texto de la pregunta-->");
-        gets(pregunta.texto);
-        fflush(stdin);
-        printf("Ingrese la cantidad de opciones-->");
-        scanf("%d",&pregunta.cantOpciones);
-        fflush(stdin);
-        printf("Ingrese cuantos puntos vale la pregunta-->");
-        scanf("%d",&pregunta.puntos);
-        fflush(stdin);
-        //Escribir la pregunta en el archivo
-        fwrite(&pregunta, sizeof(pregunta),1,f);
-        fclose(f);
-        totalPuntos = totalPuntos + pregunta.puntos;
-        printf("Registro guardado, ahora agregaremos las opciones de esta pregunta\n");
-        system("pause");
-        system("cls");
-
-        //Una vez guardada la pregunta, agrega las opciones
-
-        //Ciclo para agragar las opciones de esta pregunta
-        for(j=1;j<=pregunta.cantOpciones;j++){
-            //Abre el archivo de preguntas para agregar
-            f = fopen("Opciones.txt","a");
-            printf("-------------------------------------------------------\n");
-            printf("Cuestionario %s\n",cuestionario.idCuestionario);
-            printf("Pregunta %s\n",pregunta.texto);
-            printf("Opción número %d de %d\n",j,pregunta.cantOpciones);
-            printf("-------------------------------------------------------\n");
-            //copia el id del cuestionario, usuario y de la pregunta en la opcion
-            strcpy(opcion.idCuestionario,cuestionario.idCuestionario);
-            strcpy(opcion.idPregunta,pregunta.idPregunta);
-            strcpy(opcion.idUsuario,idUsuario);//copia el usuario
-
-            fflush(stdin);
-            //pedir datos al usuario actual
-            opcion.respuesta=j;
-            printf("Ingrese el texto de la opción-->");
-            gets(opcion.texto);
-            fflush(stdin);
-            do{
-                printf("Es esta la opción correcta de la pregunta? (1=Si, 0=No)-->");
-                scanf("%d",&opcion.correcta);
-                fflush(stdin);
-            } while(!(opcion.correcta==1 || opcion.correcta==0));//Repetir hasta que sea 1 o 0
-            //Escribir la pregunta en el archivo
-            fwrite(&opcion, sizeof(opcion),1,f);
-            fclose(f);
-            printf("Registro guardado\n");
-            system("pause");
-            system("cls");
-        }
-    }
-
-    printf("Proceso completo!!!\n");
-    Sleep(2000);
     system("cls");
 
     return 0;

@@ -8,6 +8,8 @@ Archivo fuente para registrar respuestas de los estudiantes
 
 ***/
 
+int seleccionarCuestionario(char idEstudiante[25], char idDocente[25]);//prototipo de funcion
+
 int responderCuestionario(char idUsuario[25]){
 
     FILE *f;
@@ -25,7 +27,6 @@ int responderCuestionario(char idUsuario[25]){
     printf("Listado de docentes activos en el Sistema de evaluaciones ISI - UCA\n");
     printf("-------------------------------------------------------------------\n");
     f = fopen("Usuarios.txt","r");
-    printf("%-20s%-20s%-20s\n","Id","Nombre","Rol");
     while(fread(&usuario,sizeof(struct Usuario),1,f)){//Lee el archivo con el tamaño de la  estructura Usuario
         if (strcmp("docente", usuario.rol)==0 && usuario.activo==1){
             printf("%-20s%-20s%-20s\n",usuario.id,usuario.nombre,usuario.rol);
@@ -34,14 +35,14 @@ int responderCuestionario(char idUsuario[25]){
     fclose(f);
 
 
-    printf("\nFavor ingrese el id del docente del cuestionario-->");
+    printf("\nFavor seleccione el id del docente del cuestionario-->");
     scanf("%s",idDocente);
 
     f = fopen("Usuarios.txt","r");
     printf("%-20s%-20s%-20s\n","Id","Nombre","Rol");
     while(fread(&usuario,sizeof(struct Usuario),1,f)){//Lee el archivo con el tamaño de la  estructura Usuario
-        if (strcmp("docente", usuario.rol)==0 && usuario.activo==1){
-            printf("%-20s%-20s%-20s\n",usuario.id,usuario.nombre,usuario.rol);
+        if (strcmp(idDocente, usuario.id)==0 && usuario.activo==1){
+            seleccionarCuestionario(idUsuario,idDocente);
         }
     }
     fclose(f);

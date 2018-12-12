@@ -47,7 +47,6 @@ int agregarPreguntas(char idCuestionario[10],char descCuestionario[100],char idU
     //Ciclo para buscar el cuestionario
     while(fread(&cuestionario,sizeof(struct Cuestionario),1,f)){//Lee el archivo con el tamaño de la  estructura Cuestionario
         if(strcmp(idCuestionario,cuestionario.idCuestionario)==0 && strcmp(idUsuario,cuestionario.idUsuario)==0){
-            printf("Ingrese la nueva descripción-->");
             cuestionario.cantPreg = cuestionario.cantPreg + 1;
             //Busca la posición del cuestionario en el archivo
             fseek(f,i*sizeof(cuestionario),SEEK_SET);
