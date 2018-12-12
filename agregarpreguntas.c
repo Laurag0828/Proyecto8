@@ -19,7 +19,7 @@ int agregarPreguntas(char idCuestionario[10],char descCuestionario[100],char idU
     printf("Agregar pregunta al cuestionario %s\n",descCuestionario);
     printf("-------------------------------------------------------\n");
     //copia el id del cuestionario en la pregunta
-    strcpy(pregunta.idCuestionario,cuestionario.idCuestionario);
+    strcpy(pregunta.idCuestionario,idCuestionario);
     strcpy(pregunta.idUsuario,idUsuario);//copia el usuario
     fflush(stdin);
     //pedir datos al usuario actual
@@ -54,7 +54,7 @@ int agregarPreguntas(char idCuestionario[10],char descCuestionario[100],char idU
         printf("Opción número %d de %d\n",j,pregunta.cantOpciones);
         printf("-------------------------------------------------------\n");
         //copia el id del cuestionario, usuario y de la pregunta en la opcion
-        strcpy(opcion.idCuestionario,cuestionario.idCuestionario);
+        strcpy(opcion.idCuestionario,idCuestionario);
         strcpy(opcion.idPregunta,pregunta.idPregunta);
         strcpy(opcion.idUsuario,idUsuario);//copia el usuario
 
