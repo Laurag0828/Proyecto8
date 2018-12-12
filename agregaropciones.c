@@ -6,7 +6,7 @@
 #include "Opciones.h"//Incluir ek dato de tipo opcion
 
 
-int agregarOpciones(char idCuestionario[10],char descCuestionario[100],char idUsuario[25],char idPregunta[10]){
+int agregarOpciones(char idCuestionario[10],char descCuestionario[100],char idUsuario[25],char idPregunta[10],char descPregunta[10]){
 
     FILE *f; //Apuntador para abrir archivos
     int i; //Contador para encontrar la posicion de la pregunta en el archivo
@@ -14,6 +14,11 @@ int agregarOpciones(char idCuestionario[10],char descCuestionario[100],char idUs
     struct Pregunta pregunta; //Para manejo de preguntas
 
     f = fopen("Opciones.txt","a");
+    printf("-------------------------------------------------------\n");
+    printf("Agregar opciones de una pregunta\n");
+    printf("Cuestionario %s\n", descCuestionario);
+    printf("Pregunta %s\n", descPregunta);
+    printf("-------------------------------------------------------\n");
     //copia el id del cuestionario y de la pregunta en la opcion
     strcpy(opcion.idCuestionario,idCuestionario);
     strcpy(opcion.idPregunta,idPregunta);
