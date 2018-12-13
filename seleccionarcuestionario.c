@@ -45,8 +45,6 @@ int seleccionarCuestionario(char idEstudiante[25], char idDocente[25]){
         if(strcmp(idCuestionario,cuestionario.idCuestionario)==0 ){
             encontrado=1;
             iniciarCuestionario(idEstudiante,idDocente,idCuestionario);
-            printf("----El cuestionario va a iniciarse -----\n");
-            system("pause");
         }
     }
     fclose(f);

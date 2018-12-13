@@ -6,13 +6,14 @@
 
 int agregarPreguntas(char idCuestionario[10],char descCuestionario[100],char idUsuario[25]){
 
-    FILE *f; //Apuntador para abrir archivos
+    FILE *fPregunta; //Apuntador para abrir archivos
+    FILE *fCuestionario; //Apuntador para abrir archivos
     struct Cuestionario cuestionario; //Para manejo del cuestionario
     struct Pregunta pregunta; //Para manejo de la pregunta
     int i;//Ciclo para cuestionarios
 
     //Abre el archivo de preguntas para agregar
-    f = fopen("Preguntas.txt","a");
+    fPregunta = fopen("Preguntas.txt","a");
     printf("-------------------------------------------------------\n");
     printf("Agregar pregunta al cuestionario %s\n",descCuestionario);
     printf("-------------------------------------------------------\n");
@@ -39,29 +40,34 @@ int agregarPreguntas(char idCuestionario[10],char descCuestionario[100],char idU
     scanf("%d",&pregunta.puntos);
     fflush(stdin);
     //Escribir la pregunta en el archivo
-    fwrite(&pregunta, sizeof(pregunta),1,f);
-    fclose(f);
+    fwrite(&pregunta, sizeof(pregunta),1,fPregunta);
+    fclose(fPregunta);
+    fPregunta=NULL;
 
     //Abre el archivo en modo lectura y escritura
-    f = fopen("Cuestionarios.txt","r+");
+    fCuestionario = fopen("Cuestionarios.txt","r+");
 
 
     i=0; //Inicializa el contador de registros
 
     //Ciclo para buscar el cuestionario
-    while(fread(&cuestionario,sizeof(struct Cuestionario),1,f)){//Lee el archivo con el tamaño de la  estructura Cuestionario
+    while(fread(&cuestionario,sizeof(struct Cuestionario),1,fCuestionario)){//Lee el archivo con el tamaño de la  estructura Cuestionario
         if(strcmp(idCuestionario,cuestionario.idCuestionario)==0 && strcmp(idUsuario,cuestionario.idUsuario)==0){
+            strcpy(cuestionario.idCuestionario,idCuestionario);
+            strcpy(cuestionario.descripcion,descCuestionario);
+            strcpy(cuestionario.idUsuario,idUsuario);
             cuestionario.cantPreg = cuestionario.cantPreg + 1;
             //Busca la posición del cuestionario en el archivo
-            fseek(f,i*sizeof(cuestionario),SEEK_SET);
+            fseek(fCuestionario,i*sizeof(cuestionario),SEEK_SET);
             //Escribe el cuestionario modificado en esa posición
-            fwrite(&cuestionario,sizeof(cuestionario),1,f);
+            fwrite(&cuestionario,sizeof(cuestionario),1,fCuestionario);
             break; //Finaliza la modificacion de cuestionario, termina el ciclo de busqueda
         }
         i++;//Si no lo encuentra aumenta la posicion a un registro mas
     }
     //Cerrar el archivo
-    fclose(f);
+    fclose(fCuestionario);
+    fCuestionario=NULL;
 
     printf("Registro guardado, para agregar las opciones de esta pregunta, vaya al menú 'Gestionar opciones de una pregunta'\n");
     printf("y luego seleccione 'Agregar opción'\n");

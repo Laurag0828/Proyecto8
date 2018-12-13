@@ -10,6 +10,8 @@ int testdata(){
     remove("Cuestionarios.txt");
     remove("Preguntas.txt");
     remove("Opciones.txt");
+    remove("Respuestas.txt");
+    remove("Calificaciones.txt");
 
     struct Cuestionario cuestionario1 = {"01","Evaluación suma", "Matemáticas", 5, 1,"0000123"};
     struct Cuestionario cuestionario2 = {"02","Evaluación multiplicación", "Matemáticas", 5, 1,"0000123"};

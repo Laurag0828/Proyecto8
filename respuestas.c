@@ -41,7 +41,7 @@ int responderCuestionario(char idUsuario[25]){
     encontrado=0; //Inicializa la variable de control en preguntas aun no encontrado
     f = fopen("Usuarios.txt","r");
     while(fread(&usuario,sizeof(struct Usuario),1,f)){//Lee el archivo con el tamaño de la  estructura Usuario
-        if (strcmp(idDocente, usuario.id)==0 && usuario.activo==1){
+        if (strcmp("docente", usuario.rol)==0 && strcmp(idDocente, usuario.id)==0 && usuario.activo==1){
             encontrado=1;
             seleccionarCuestionario(idUsuario,idDocente);
         }

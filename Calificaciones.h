@@ -11,8 +11,12 @@ Estructura calificacion para almacenar las calificaciones de los estudiantes en 
 struct Calificacion
 {
     char idCuestionario[10];//Cuestionario
-    char idUsuario[10];//Usuario que contesta
-    int calificacion; //Calificacion obtenida
+    char idDocente[25];//Docente
+    char idEstudiante[25];//Estudiante
+    int puntosTotal; //puntos total del cuestionario
+    int puntosObtenidos; //puntos obtenidos
+    float porcentaje;//porcentaje
+
 } ;
 
 #endif // CALIFICACIONES_H_INCLUDED
