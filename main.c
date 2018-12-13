@@ -83,7 +83,7 @@ int main()
                             }
                             //Opciones para todos los usuarios
                             printf("[6] Cambiar mi contraseña\n");
-                            printf("[9] Salir del sistema\n");
+                            printf("[0] Salir del sistema\n");
                             printf("-------------------------------------------------------\n");
 
                             printf("Su selección-->");
@@ -151,7 +151,7 @@ int main()
                                 case 8:
                                     testdata();
                                     break;
-                                case 9:
+                                case 0:
                                     //Sale del sistema (evaluacion en el while)
                                     printf("Saliendo del sistema......\n");
                                     fflush(stdout);

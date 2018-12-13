@@ -21,6 +21,7 @@ int modificarPreguntas(char idPregunta[10], char idCuestionario[10],char idUsuar
 
 int listarOpciones(char idCuestionario[10],char idUsuario[25],char idPregunta[10]);
 int agregarOpciones(char idCuestionario[10],char idUsuario[25],char idPregunta[10]);
+int modificarOpciones(char idCuestionario[10],char idPregunta[10], int idOpcion,char idUsuario[25]);
 
 
 int manejoCuestionarios(char idUsuario[25])
@@ -30,6 +31,7 @@ int manejoCuestionarios(char idUsuario[25])
 
     char idCuestionario[10];
     char idPregunta[10];
+    int idOpcion;
 
     //Ciclo do...while para repetir el menu hasta que se selecciona 9 para salir al menu principal
     do{
@@ -81,6 +83,7 @@ int manejoCuestionarios(char idUsuario[25])
             break;
         case 6:
             //Presenta una lista de todos los preguntas en este cuestionario
+            printf("Listar preguntas\n");
             printf("Ingrese el id del cuestionario-->");
             fflush(stdout);
             scanf("%s",idCuestionario);
@@ -96,6 +99,7 @@ int manejoCuestionarios(char idUsuario[25])
             agregarPreguntas(idCuestionario,idUsuario);
             break;
         case 8:
+            printf("Modificar pregunta\n");
             printf("Ingrese el id del cuestionario-->");
             fflush(stdout);
             scanf("%s",idCuestionario);
@@ -107,6 +111,7 @@ int manejoCuestionarios(char idUsuario[25])
             modificarPreguntas(idPregunta,idCuestionario,idUsuario);
             break;
         case 9:
+            printf("Listar opciones\n");
             printf("Ingrese el id del cuestionario-->");
             fflush(stdout);
             scanf("%s",idCuestionario);
@@ -119,6 +124,7 @@ int manejoCuestionarios(char idUsuario[25])
             listarOpciones(idCuestionario,idUsuario,idPregunta);
             break;
         case 10:
+            printf("Agregar opción\n");
             printf("Ingrese el id del cuestionario-->");
             fflush(stdout);
             scanf("%s",idCuestionario);
@@ -129,6 +135,23 @@ int manejoCuestionarios(char idUsuario[25])
             fflush(stdin);
             //Agrega una opcion nueva en la pregunta
             agregarOpciones(idCuestionario,idUsuario,idPregunta);
+            break;
+        case 11:
+            printf("Modificar opción\n");
+            printf("Ingrese el id del cuestionario-->");
+            fflush(stdout);
+            scanf("%s",idCuestionario);
+            fflush(stdin);
+            printf("Ingrese el id de la pregunta-->");
+            fflush(stdout);
+            scanf("%s",idPregunta);
+            fflush(stdin);
+            printf("Ingrese el id de la opción a buscar-->");
+            fflush(stdout);
+            scanf("%d",&idOpcion);
+            fflush(stdin);
+            //Modifica los datos de la opcion
+            modificarOpciones(idCuestionario,idPregunta,idOpcion,idUsuario);
             break;
         case 0:
             printf("Regresando a la pantalla principal...\n");
@@ -144,6 +167,6 @@ int manejoCuestionarios(char idUsuario[25])
             break;
         }
 
-    }while(opcionCuestionarios!=9);
+    }while(opcionCuestionarios!=0);
     return 0;
 }

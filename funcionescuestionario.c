@@ -32,7 +32,10 @@ int agregarCuestionario(char idUsuario[25]){
     fflush(stdout);
     gets(cuestionario.asignatura);
     fflush(stdin);
-    cuestionario.cantPreg=0;
+    printf("Ingrese la cantidad de preguntas-->");
+    fflush(stdout);
+    scanf("%d",&cuestionario.cantPreg);
+    fflush(stdin);
     do{
         printf("Quiere dejar este cuestionario activo para responder? (1=Si, 0=No)-->");
         fflush(stdout);
@@ -240,6 +243,10 @@ int modificarCuestionario(char idUsuario[25]){
                 printf("Ingrese la nueva asignatura-->");
                 fflush(stdout);
                 gets(cuestionario.asignatura);
+                fflush(stdin);
+                printf("Ingrese la cantidad de preguntas-->");
+                fflush(stdout);
+                scanf("%d",&cuestionario.cantPreg);
                 fflush(stdin);
                 //Escribe el cuestionario modificado en esa posición
                 fwrite(&cuestionario,sizeof(cuestionario),1,fModificarTemp);

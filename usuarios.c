@@ -32,7 +32,7 @@ int manejoUsuarios(char id[25])
         printf("[4] Activar usuario\n");
         printf("[5] Listar usuarios\n");
         printf("[6] Buscar un usuario\n");
-        printf("[9] Regresar a menú principal\n");
+        printf("[0] Regresar a menú principal\n");
         printf("-------------------------------------------------------\n");
         fflush(stdout);
         printf("Su selección-->");
@@ -321,7 +321,7 @@ int manejoUsuarios(char id[25])
             system("pause");
             system("cls");
             break;
-        case 9:
+        case 0:
             printf("Regresando a la pantalla principal...\n");
             fflush(stdout);
             Sleep(1000);
