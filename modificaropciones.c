@@ -19,9 +19,12 @@ FILE *f;
     printf("Cuestionario %s\n", descCuestionario);
     printf("Pregunta %s\n", descPregunta);
     printf("-------------------------------------------------------\n");
+    fflush(stdout);
     //pedir datos del usuario a buscar
     printf("Ingrese el id de la opción a buscar-->");
+    fflush(stdout);
     scanf("%d",&idOpcion);
+    fflush(stdin);
 
     //Leer el contenido del archivo y busca el usuario por el id
     encontrado=0;//Inicializa la variable de control en preguntas aun no encontrado
@@ -35,16 +38,19 @@ FILE *f;
                 printf("\n\nrespuesta: %d", opcion.respuesta);
                 printf("\ntexto: %s\n\n", opcion.texto);
                 printf("Desea modificar esta opción? (1=Si, 2=No)-->");
+                fflush(stdout);
                 scanf("%d",&respuesta);
                 fflush(stdin);
             } while(!(respuesta==1 || respuesta==2));//Repetir hasta que sea 1 o 2
 
             if(respuesta==1){
                 printf("Ingrese el nuevo texto de la opción-->");
+                fflush(stdout);
                 gets(opcion.texto);
                 fflush(stdin);
                 do{
                    printf("Es esta la opción correcta de la pregunta? (1=Si, 0=No)-->");
+                   fflush(stdout);
                    scanf("%d",&opcion.correcta);
                    fflush(stdin);
                 } while(!(opcion.correcta==1 || opcion.correcta==0));//Repetir hasta que sea 1 o 0
@@ -53,9 +59,11 @@ FILE *f;
                 //Escribe el opcion modificado en esa posición
                 fwrite(&opcion,sizeof(opcion),1,f);
                 printf("Registro modificado!\n");
+                fflush(stdout);
             }
             else{
                 printf("Acción cancelada!!!\n");
+                fflush(stdout);
             }
             encontrado=1; //Si se encuentra una pregunta se cambia la variable de control a encontrado
             break; //Finaliza la modificacion de la pregunta, termina el ciclo de busqueda
@@ -65,13 +73,12 @@ FILE *f;
 
     if(encontrado==0){//Si la variable de control esta en cero significa que no encontró la opcion en el archivo
         printf("----La opcion %d no está registrada -----\n",idOpcion);
+        fflush(stdout);
     }
     //Cerrar el archivo
     fclose(f);
     system("pause");
     system("cls");
-
-
 
     return 0;
 }

@@ -22,12 +22,14 @@ int main()
     printf("-------------------------------------------------------\n");
     printf("Sistema de evaluaciones ISI - UCA - Ingreso de usuario \n");
     printf("-------------------------------------------------------\n");
+    fflush(stdout);
 
     FILE *f; //Apuntador para abrir archivos
     if(fopen("Usuarios.txt","r")==NULL){
         //Si el archivo no existe crea un archivo nuevo y agrega un usuario por defecto
         f=fopen("Usuarios.txt","a");
         printf("Se ha creado un nuevo archivo....\n");
+        fflush(stdout);
         struct Usuario usuarioTemp = {"0000123","Docente","docente","123",1};//Crea el usuario por defecto
         fwrite(&usuarioTemp, sizeof(usuarioTemp),1,f);//Lo escribe en el archivo
         fclose(f);//Cierra el archivo
@@ -37,7 +39,9 @@ int main()
 
     /*Pide el id al usuario*/
     printf("Ingrese su id de usuario:");
+    fflush(stdout);
     scanf("%s",idUsuario);
+    fflush(stdin);
 
 
     while(fread(&usuarioLogeado,sizeof(struct Usuario),1,f)){//Lee el archivo con el tamaño de la  estructura Usuario
@@ -47,7 +51,9 @@ int main()
             if(usuarioLogeado.activo==1){
                 do{
                     printf("Ingrese su contraseña:");//Pide la contraseña
+                    fflush(stdout);
                     scanf("%s",contrasenia);
+                    fflush(stdin);
                     if(strcmp(contrasenia,usuarioLogeado.contrasenia)==0){
                         //Si la contraseña coincide con la almacenada presenta el menú principal
                         printf("Cargando...");
@@ -61,15 +67,18 @@ int main()
                             printf("Sistema de evaluaciones ISI - UCA - Menú principal \n");
                             printf("%s %s\n","Usuario actual: ", usuarioLogeado.id);
                             printf("-------------------------------------------------------\n");
+                            fflush(stdout);
                             //Evalúa si el usuario ingresado es docente y presenta las opciones del docente
                             if(strcmp(usuarioLogeado.rol,"docente")==0){
                                 printf("[1] Manejo de cuestionarios\n");
                                 printf("[2] Manejo de usuarios\n");
                                 printf("[3] Reportes\n");
+                                fflush(stdout);
                             }
                             //Evalúa si el usuario ingresado es estudiante y presenta las opciones del estudiante
                             if(strcmp(usuarioLogeado.rol,"estudiante")==0){
                                 printf("[4] Responder un cuestionario\n");
+                                fflush(stdout);
                             }
                             //Opciones para todos los usuarios
                             printf("[5] Cambiar mi contraseña\n");
@@ -77,7 +86,9 @@ int main()
                             printf("-------------------------------------------------------\n");
 
                             printf("Su selección-->");
+                            fflush(stdout);
                             scanf("%d",&opcionPrincipal);
+                            fflush(stdin);
                             system("cls");
 
                             switch(opcionPrincipal){
@@ -89,6 +100,7 @@ int main()
                                     }
                                     else{
                                         printf("No tiene permiso para esta opción!...");
+                                        fflush(stdout);
                                         system("pause");
                                         system("cls");
                                     }
@@ -101,6 +113,7 @@ int main()
                                     }
                                     else{
                                         printf("No tiene permiso para esta opción!...");
+                                        fflush(stdout);
                                         system("pause");
                                         system("cls");
                                     }
@@ -113,6 +126,7 @@ int main()
                                     }
                                     else{
                                         printf("No tiene permiso para esta opción!...");
+                                        fflush(stdout);
                                         system("pause");
                                         system("cls");
                                     }
@@ -125,6 +139,7 @@ int main()
                                     }
                                     else{
                                         printf("No tiene permiso para esta opción!...");
+                                        fflush(stdout);
                                         system("pause");
                                         system("cls");
                                     }
@@ -138,10 +153,12 @@ int main()
                                 case 9:
                                     //Sale del sistema (evaluacion en el while)
                                     printf("Saliendo del sistema......\n");
+                                    fflush(stdout);
                                     break;
                                 default:
                                     //Cualquier otra opción es inválida
                                     printf("Opción seleccionada es inválida!!!\n");
+                                    fflush(stdout);
                                     Sleep(1000);
                                     system("cls");
                                     break;
@@ -153,17 +170,20 @@ int main()
                         //Si no coincide la contraseña la pide nuevamente
                         printf("----Contraseña incorrecta! Ingrese contraseña nuevamente...-----\n");
                         printf("para salir presione CTRL + C \n\n");
+                        fflush(stdout);
                     }
                 }
                 while(1);//Repite ciclo para pedir contraseña de forma permanente
             }
             else{
                 printf("----El usuario %s no está activo -----\n",idUsuario);
+                fflush(stdout);
             }
         }
     }
     if(encontrado==0){//Si la variable de control esta en cero significa que no encontró al usuario en el archivo de usuarios
         printf("----El usuario %s no está registrado -----\n",idUsuario);
+        fflush(stdout);
     }
 
     //termina el programa

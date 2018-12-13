@@ -16,15 +16,18 @@ int agregarPreguntas(char idCuestionario[10],char descCuestionario[100],char idU
     printf("-------------------------------------------------------\n");
     printf("Agregar pregunta al cuestionario %s\n",descCuestionario);
     printf("-------------------------------------------------------\n");
+    fflush(stdout);
     //copia el id del cuestionario en la pregunta
     strcpy(pregunta.idCuestionario,idCuestionario);
     strcpy(pregunta.idUsuario,idUsuario);//copia el usuario
     fflush(stdin);
     //pedir datos al usuario actual
     printf("Ingrese el id de la pregunta-->");
+    fflush(stdout);
     scanf("%s",pregunta.idPregunta);
     fflush(stdin);
     printf("Ingrese el texto de la pregunta-->");
+    fflush(stdout);
     gets(pregunta.texto);
     fflush(stdin);
     //printf("Ingrese la cantidad de opciones-->");
@@ -32,6 +35,7 @@ int agregarPreguntas(char idCuestionario[10],char descCuestionario[100],char idU
     //fflush(stdin);
     pregunta.cantOpciones=0;
     printf("Ingrese cuantos puntos vale la pregunta-->");
+    fflush(stdout);
     scanf("%d",&pregunta.puntos);
     fflush(stdin);
     //Escribir la pregunta en el archivo
@@ -61,6 +65,7 @@ int agregarPreguntas(char idCuestionario[10],char descCuestionario[100],char idU
 
     printf("Registro guardado, para agregar las opciones de esta pregunta, vaya al menú 'Gestionar opciones de una pregunta'\n");
     printf("y luego seleccione 'Agregar opción'\n");
+    fflush(stdout);
     system("pause");
     system("cls");
 

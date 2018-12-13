@@ -16,12 +16,15 @@ int listarPreguntas(char idCuestionario[10],char descCuestionario[100],char idUs
     printf("-------------------------------------------------------------------\n");
     printf("Listado de preguntas en el cuestionario %s\n", descCuestionario);
     printf("-------------------------------------------------------------------\n");
+    fflush(stdout);
 
     printf("%-10s%-10s%-60s%-10s%-10s\n","Cues","Id","Descripción","Opciones","Puntaje");
+    fflush(stdout);
 
     while(fread(&pregunta,sizeof(struct Pregunta),1,f)){//Lee el archivo con el tamaño de la  estructura Pregunta
         if (strcmp(idCuestionario, pregunta.idCuestionario)==0 && strcmp(idUsuario,pregunta.idUsuario)==0){
             printf("%-10s%-10s%-60s%-10d%-10d\n",pregunta.idCuestionario,pregunta.idPregunta,pregunta.texto,pregunta.cantOpciones,pregunta.puntos);
+            fflush(stdout);
         }
     }
     //Cierra el archivo

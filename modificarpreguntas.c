@@ -22,11 +22,12 @@ int modificarPreguntas(char idCuestionario[10],char descCuestionario[100],char i
     printf("Modificar una pregunta\n");
     printf("Cuestionario %s\n", descCuestionario);
     printf("-------------------------------------------------------\n");
+    fflush(stdout);
     //pedir datos del usuario a buscar
     printf("Ingrese el id de la pregunta a buscar-->");
+    fflush(stdout);
     scanf("%s",idPregunta);
-
-
+    fflush(stdin);
 
     //Leer el contenido del archivo y busca el usuario por el id
     encontrado=0; //Inicializa la variable de control en preguntas aun no encontrado
@@ -40,15 +41,18 @@ int modificarPreguntas(char idCuestionario[10],char descCuestionario[100],char i
                 printf("\n\nId: %s", pregunta.idPregunta);
                 printf("\nDescripción: %s\n\n", pregunta.texto);
                 printf("Desea modificar esta pregunta? (1=Si, 2=No)-->");
+                fflush(stdout);
                 scanf("%d",&respuesta);
                 fflush(stdin);
             } while(!(respuesta==1 || respuesta==2));//Repetir hasta que sea 1 o 2
 
             if(respuesta==1){
                 printf("Ingrese el nuevo texto de la pregunta-->");
+                fflush(stdout);
                 gets(pregunta.texto);
                 fflush(stdin);
                 printf("Ingrese cuantos puntos vale la pregunta-->");
+                fflush(stdout);
                 scanf("%d",&pregunta.puntos);
                 fflush(stdin);
                 //Busca la posición del pregunta en el archivo
@@ -56,9 +60,11 @@ int modificarPreguntas(char idCuestionario[10],char descCuestionario[100],char i
                 //Escribe el pregunta modificado en esa posición
                 fwrite(&pregunta,sizeof(pregunta),1,f);
                 printf("Registro modificado!\n");
+                fflush(stdout);
             }
             else{
                 printf("Acción cancelada!!!\n");
+                fflush(stdout);
             }
             encontrado=1; //Si se encuentra una pregunta se cambia la variable de control a encontrado
             break; //Finaliza la modificacion de la pregunta, termina el ciclo de busqueda
@@ -68,6 +74,7 @@ int modificarPreguntas(char idCuestionario[10],char descCuestionario[100],char i
 
     if(encontrado==0){//Si la variable de control esta en cero significa que no encontró el cuestionario en el archivo
         printf("----La pregunta %s no está registrada -----\n",idPregunta);
+        fflush(stdout);
     }
     //Cerrar el archivo
     fclose(f);

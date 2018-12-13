@@ -17,20 +17,25 @@ int agregarCuestionario(char idUsuario[25]){
     printf("-------------------------------------------------------\n");
     printf("Ingresando nuevo cuestionario\n");
     printf("-------------------------------------------------------\n");
+    fflush(stdout);
     strcpy(cuestionario.idUsuario,idUsuario);//copia el usuario
     //pedir datos al usuario actual
     printf("Ingrese el id del cuestionario-->");
+    fflush(stdout);
     scanf("%s",cuestionario.idCuestionario);
     fflush(stdin);
     printf("Ingrese la descripción-->");
+    fflush(stdout);
     gets(cuestionario.descripcion);
     fflush(stdin);
     printf("Ingrese la asignatura-->");
+    fflush(stdout);
     gets(cuestionario.asignatura);
     fflush(stdin);
     cuestionario.cantPreg=0;
     do{
         printf("Quiere dejar este cuestionario activo para responder? (1=Si, 0=No)-->");
+        fflush(stdout);
         scanf("%d",&cuestionario.activo);
         fflush(stdin);
     } while(!(cuestionario.activo==1 || cuestionario.activo==0));//Repetir hasta que sea 1 o 0
@@ -39,6 +44,7 @@ int agregarCuestionario(char idUsuario[25]){
     fclose(f);
     printf("Registro guardado, para agregar las preguntas de este cuestionario, vaya al menú 'Gestionar preguntas de un cuestionario'\n");
     printf("y luego seleccione 'Agregar pregunta'\n");
+    fflush(stdout);
     system("pause");
     system("cls");
 
@@ -60,9 +66,12 @@ int activarCuestionario(char idUsuario[25]){
     printf("-------------------------------------------------------\n");
     printf("Activar un cuestionario\n");
     printf("-------------------------------------------------------\n");
+    fflush(stdout);
     //pedir datos del cuestionario a buscar
     printf("Ingrese el id del cuestionario a activar-->");
+    fflush(stdout);
     scanf("%s",idCuestionario);
+    fflush(stdin);
 
     i=0; //Inicializa el contador de registros
 
@@ -72,6 +81,7 @@ int activarCuestionario(char idUsuario[25]){
             //Si encuentra el cuestionario pregunta si va a activarlo
             do{
                 printf("Desea activar este cuestionario? (1=Si, 2=No)-->");
+                fflush(stdout);
                 scanf("%d",&respuesta);
                 fflush(stdin);
             } while(!(respuesta==1 || respuesta==2));//Repetir hasta que sea 1 o 2
@@ -83,9 +93,11 @@ int activarCuestionario(char idUsuario[25]){
                 //Escribe el cuestionario modificado en esa posición
                 fwrite(&cuestionario,sizeof(cuestionario),1,f);
                 printf("Cuestionario ahora está activo!\n");
+                fflush(stdout);
             }
             else{
                 printf("Acción cancelada!!!\n");
+                fflush(stdout);
             }
             encontrado=1; //Si se encuentra un cuestionario se cambia la variable de control a encontrado
             break; //Finaliza la modificacion de cuestionario, termina el ciclo de busqueda
@@ -94,6 +106,7 @@ int activarCuestionario(char idUsuario[25]){
     }
     if(encontrado==0){//Si la variable de control esta en cero significa que no encontró el cuestionario en el archivo
         printf("----El cuestionario %s no está registrado -----\n",idCuestionario);
+        fflush(stdout);
     }
     //Cerrar el archivo
     fclose(f);
@@ -116,9 +129,12 @@ int desactivarCuestionario(char idUsuario[25]){
     printf("-------------------------------------------------------\n");
     printf("Desactivar un cuestionario\n");
     printf("-------------------------------------------------------\n");
+    fflush(stdout);
     //pedir datos del cuestionario a buscar
     printf("Ingrese el id del cuestionario a desactivar-->");
+    fflush(stdout);
     scanf("%s",idCuestionario);
+    fflush(stdin);
 
     i=0; //Inicializa el contador de registros
 
@@ -128,6 +144,7 @@ int desactivarCuestionario(char idUsuario[25]){
             //Si encuentra el cuestionario pregunta si va a desactivarlo
             do{
                 printf("Desea desactivar este cuestionario? (1=Si, 2=No)-->");
+                fflush(stdout);
                 scanf("%d",&respuesta);
                 fflush(stdin);
             } while(!(respuesta==1 || respuesta==2));//Repetir hasta que sea 1 o 2
@@ -139,9 +156,11 @@ int desactivarCuestionario(char idUsuario[25]){
                 //Escribe el cuestionario modificado en esa posición
                 fwrite(&cuestionario,sizeof(cuestionario),1,f);
                 printf("Cuestionario ahora está inactivo!\n");
+                fflush(stdout);
             }
             else{
                 printf("Acción cancelada!!!\n");
+                fflush(stdout);
             }
             encontrado=1; //Si se encuentra un cuestionario se cambia la variable de control a encontrado
             break; //Finaliza la modificacion de cuestionario, termina el ciclo de busqueda
@@ -150,6 +169,7 @@ int desactivarCuestionario(char idUsuario[25]){
     }
     if(encontrado==0){//Si la variable de control esta en cero significa que no encontró el cuestionario en el archivo
         printf("----El cuestionario %s no está registrado -----\n",idCuestionario);
+        fflush(stdout);
     }
     //Cerrar el archivo
     fclose(f);
@@ -173,9 +193,12 @@ int modificarCuestionario(char idUsuario[25]){
     printf("-------------------------------------------------------\n");
     printf("Modificar un cuestionario\n");
     printf("-------------------------------------------------------\n");
+    fflush(stdout);
     //pedir datos del cuestionario a buscar
     printf("Ingrese el id del cuestionario a modificar-->");
+    fflush(stdout);
     scanf("%s",idCuestionario);
+    fflush(stdin);
 
     i=0; //Inicializa el contador de registros
 
@@ -188,15 +211,18 @@ int modificarCuestionario(char idUsuario[25]){
                 printf("\nDescripción: %s", cuestionario.descripcion);
                 printf("\nAsignatura: %s\n\n", cuestionario.asignatura);
                 printf("Desea modificar este cuestionario? (1=Si, 2=No)-->");
+                fflush(stdout);
                 scanf("%d",&respuesta);
                 fflush(stdin);
             } while(!(respuesta==1 || respuesta==2));//Repetir hasta que sea 1 o 2
 
             if(respuesta==1){
                 printf("Ingrese la nueva descripción-->");
+                fflush(stdout);
                 gets(cuestionario.descripcion);
                 fflush(stdin);
                 printf("Ingrese la nueva asignatura-->");
+                fflush(stdout);
                 gets(cuestionario.asignatura);
                 fflush(stdin);
                 cuestionario.activo=0;
@@ -205,9 +231,11 @@ int modificarCuestionario(char idUsuario[25]){
                 //Escribe el cuestionario modificado en esa posición
                 fwrite(&cuestionario,sizeof(cuestionario),1,f);
                 printf("Cuestionario modificado!\n");
+                fflush(stdout);
             }
             else{
                 printf("Acción cancelada!!!\n");
+                fflush(stdout);
             }
             encontrado=1; //Si se encuentra un cuestionario se cambia la variable de control a encontrado
             break; //Finaliza la modificacion de cuestionario, termina el ciclo de busqueda
@@ -216,6 +244,7 @@ int modificarCuestionario(char idUsuario[25]){
     }
     if(encontrado==0){//Si la variable de control esta en cero significa que no encontró el cuestionario en el archivo
         printf("----El cuestionario %s no está registrado -----\n",idCuestionario);
+        fflush(stdout);
     }
     //Cerrar el archivo
     fclose(f);
@@ -239,9 +268,12 @@ int gestionarCuestionario(char idUsuario[25]){
     printf("-------------------------------------------------------\n");
     printf("Gestionar un cuestionario\n");
     printf("-------------------------------------------------------\n");
+    fflush(stdout);
     //pedir datos del cuestionario a buscar
     printf("Ingrese el id del cuestionario a gestionar-->");
+    fflush(stdout);
     scanf("%s",idCuestionario);
+    fflush(stdin);
 
     i=0; //Inicializa el contador de registros
 
@@ -251,6 +283,7 @@ int gestionarCuestionario(char idUsuario[25]){
             //Si encuentra el cuestionario pregunta si va a desactivarlo
             do{
                 printf("Desea gestionar este cuestionario? (1=Si, 2=No)-->");
+                fflush(stdout);
                 scanf("%d",&respuesta);
                 fflush(stdin);
             } while(!(respuesta==1 || respuesta==2));//Repetir hasta que sea 1 o 2
@@ -261,6 +294,7 @@ int gestionarCuestionario(char idUsuario[25]){
             }
             else{
                 printf("Acción cancelada!!!\n");
+                fflush(stdout);
             }
             encontrado=1; //Si se encuentra un cuestionario se cambia la variable de control a encontrado
             break; //Finaliza la modificacion de cuestionario, termina el ciclo de busqueda
@@ -269,6 +303,7 @@ int gestionarCuestionario(char idUsuario[25]){
     }
     if(encontrado==0){//Si la variable de control esta en cero significa que no encontró el cuestionario en el archivo
         printf("----El cuestionario %s no está registrado -----\n",idCuestionario);
+        fflush(stdout);
         system("pause");
     }
     //Cerrar el archivo
@@ -285,17 +320,21 @@ int listarCuestionario(char idUsuario[25]){
     printf("-------------------------------------------------------------------\n");
     printf("Listado de cuestionarios en el Sistema de evaluaciones ISI - UCA\n");
     printf("-------------------------------------------------------------------\n");
+    fflush(stdout);
     //Abre el archivo
     f = fopen("Cuestionarios.txt","r");
     printf("%-10s%-60s%-20s%10s%10s\n","Id","Descripcion","Asignatura","No. preguntas","Activo");
+    fflush(stdout);
     while(fread(&cuestionario,sizeof(struct Cuestionario),1,f)){//Lee el archivo con el tamaño de la  estructura Cuestionario
         if(strcmp(idUsuario,cuestionario.idUsuario)==0){
             printf("%-10s%-60s%-20s%10d%10d\n",cuestionario.idCuestionario,cuestionario.descripcion,cuestionario.asignatura,cuestionario.cantPreg,cuestionario.activo);
+            fflush(stdout);
         }
     }
     //Cierra el archivo
     fclose(f);
     system("pause");
+    fflush(stdout);
     system("cls");
     return 0;
 

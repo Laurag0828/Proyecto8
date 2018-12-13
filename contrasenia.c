@@ -19,7 +19,7 @@ int cambiarContrasenia(char id[25])
     printf("-------------------------------------------------------\n");
     printf("Cambiar contraseña\n");
     printf("-------------------------------------------------------\n");
-
+    fflush(stdout);
 
     //Leer el contenido del archivo y busca el usuario por el id
     i=0; //Inicializa el contador a cero que es el inicio del archivo
@@ -27,6 +27,7 @@ int cambiarContrasenia(char id[25])
         if(strcmp(id,usuario.id)==0){
             fflush(stdin);
             printf("Ingrese la nueva contraseña-->");
+            fflush(stdout);
             scanf("%s",usuario.contrasenia);
             fflush(stdin);
             //Busca la posición del usuario en el archivo
@@ -34,6 +35,7 @@ int cambiarContrasenia(char id[25])
             //Escribe el usuario en esa posición
             fwrite(&usuario,sizeof(usuario),1,f);
             printf("Contraseña modificada....\n");
+            fflush(stdout);
             break; //Finaliza la modificacion de usuario, termina el ciclo de busqueda
         }
         i++;//Si no lo encuentra aumenta el contador a un registro mas

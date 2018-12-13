@@ -28,15 +28,18 @@ int manejoPreguntas(char idUsuario[25],char idCuestionario[10],char descCuestion
         printf("%s %s\n","Cuestionario actual: ", descCuestionario);
         printf("%s %s\n","Usuario actual: ", idUsuario);
         printf("---------------------------------------------------------------\n");
+        fflush(stdout);
         printf("[1] Listar preguntas de este cuestionario\n");
         printf("[2] Agregar pregunta\n");
         printf("[3] Modificar pregunta\n");
         printf("[4] Gestionar opciones de una pregunta\n");
         printf("[9] Regresar a menú cuestionarios\n");
-
         printf("-------------------------------------------------------\n");
+        fflush(stdout);
         printf("Su selección-->");
+        fflush(stdout);
         scanf("%d",&opcionPreguntas);
+        fflush(stdin);
         system("cls");
 
         switch(opcionPreguntas){
@@ -55,16 +58,20 @@ int manejoPreguntas(char idUsuario[25],char idCuestionario[10],char descCuestion
         case 4:
             //Llama a la funcion para gestionar las opciones de una pregunta
             printf("Ingrese la pregunta que va a gestionar-->");
+            fflush(stdout);
             scanf("%s",idPregunta);
+            fflush(stdin);
             manejoOpciones(idUsuario,idCuestionario,descCuestionario,idPregunta);
             break;
         case 9:
             printf("Regresando a la pantalla de cuestionarios...\n");
+            fflush(stdout);
             Sleep(1000);
             system("cls");
             break;
         default:
             printf("Opción seleccionada es inválida!!!\n");
+            fflush(stdout);
             Sleep(1000);
             system("cls");
             break;

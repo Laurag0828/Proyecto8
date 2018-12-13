@@ -17,12 +17,15 @@ int listarOpciones(char idCuestionario[10],char descCuestionario[100],char idUsu
     printf("Cuestionario %s - %s\n", idCuestionario ,descCuestionario);
     printf("Usuario: %s\n", idUsuario);
     printf("-------------------------------------------------------------------\n");
+    fflush(stdout);
 
     printf("%-10s%-60s%-10s\n","Respuesta", "Texto" ,"Correcta");
+    fflush(stdout);
 
     while(fread(&opcion,sizeof(struct Opcion),1,f)){//Lee el archivo con el tamaño de la  estructura Opcion
         if (strcmp(idCuestionario, opcion.idCuestionario)==0 && strcmp(idUsuario,opcion.idUsuario)==0 && strcmp(idPregunta,opcion.idPregunta)==0){
             printf("%-10d%-60s%-10d\n",opcion.respuesta,opcion.texto,opcion.correcta);
+            fflush(stdout);
         }
     }
     //Cierra el archivo
@@ -31,7 +34,6 @@ int listarOpciones(char idCuestionario[10],char descCuestionario[100],char idUsu
     system("cls");
 
     return 0;
-
 
     return 0;
 }

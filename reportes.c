@@ -20,15 +20,18 @@ int manejoReportes(char id[25])
         printf("Sistema de evaluaciones ISI - UCA - Reporte de calificaciones\n");
         printf("%s %s\n","Usuario actual: ", id);
         printf("---------------------------------------------------------------\n");
+        fflush(stdout);
         printf("1. Presentar resultados de un cuestionario\n");
         printf("2. Presentar resumen por cuestionario\n");
         printf("3. Historial de un estudiante\n");
         printf("4. Promedio por cuestionarios\n");
         printf("9. Regresar a menú preguntas\n");
-
         printf("-------------------------------------------------------\n");
+        fflush(stdout);
         printf("Su selección-->");
+        fflush(stdout);
         scanf("%d",&opcionReportes);
+        fflush(stdin);
         system("cls");
 
         switch(opcionReportes){

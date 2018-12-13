@@ -25,6 +25,7 @@ int manejoCuestionarios(char idUsuario[25])
         printf("Sistema de evaluaciones ISI - UCA - Manejo de cuestionarios\n");
         printf("%s %s\n","Usuario actual: ", idUsuario);
         printf("---------------------------------------------------------------\n");
+        fflush(stdout);
         printf("[1] Listar cuestionarios\n");
         printf("[2] Agregar cuestionario\n");
         printf("[3] Activar cuestionario\n");
@@ -32,10 +33,12 @@ int manejoCuestionarios(char idUsuario[25])
         printf("[5] Modificar cuestionario\n");
         printf("[6] Gestionar preguntas de un cuestionario\n");
         printf("[9] Regresar a menú principal\n");
-
         printf("-------------------------------------------------------\n");
+        fflush(stdout);
         printf("Su selección-->");
+        fflush(stdout);
         scanf("%d",&opcionCuestionarios);
+        fflush(stdin);
         system("cls");
 
         switch(opcionCuestionarios){
@@ -65,11 +68,13 @@ int manejoCuestionarios(char idUsuario[25])
             break;
         case 9:
             printf("Regresando a la pantalla principal...\n");
+            fflush(stdout);
             Sleep(1000);
             system("cls");
             break;
         default:
             printf("Opción seleccionada es inválida!!!\n");
+            fflush(stdout);
             Sleep(1000);
             system("cls");
             break;
