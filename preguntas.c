@@ -11,6 +11,7 @@ Archivo fuente para el manejo de preguntas
 int listarPreguntas(char idCuestionario[10],char descCuestionario[100],char idUsuario[25]);
 int agregarPreguntas(char idCuestionario[10],char descCuestionario[100],char idUsuario[25]);
 int modificarPreguntas(char idCuestionario[10],char descCuestionario[100],char idUsuario[25]);
+int aumentarPreguntas(char idUsuario[25],char idCuestionario[10]);
 
 int manejoOpciones(char idUsuario[25],char idCuestionario[10],char descCuestionario[100], char idPregunta[10]); //Prototipo funcion manejo de opciones
 
@@ -50,6 +51,7 @@ int manejoPreguntas(char idUsuario[25],char idCuestionario[10],char descCuestion
         case 2:
             //Agrega un pregunta nueva en el cuestionario
             agregarPreguntas(idCuestionario,descCuestionario,idUsuario);
+            //aumentarPreguntas(idUsuario,idCuestionario);
             break;
         case 3:
             //Modifica los datos de la pregunta

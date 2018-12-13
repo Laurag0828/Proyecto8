@@ -14,10 +14,22 @@ int modificarCuestionario(char idUsuario[25]); //Prototipo de funcion para modif
 int gestionarCuestionario(char idUsuario[25]); //Prototipo de funcion para llamar a la gestion del cuestionario
 int listarCuestionario(char idUsuario[25]); //Prototipo de funcion para listar cuestionariosactivarCuestionario
 
+
+int listarPreguntas(char idCuestionario[10],char idUsuario[25]);
+int agregarPreguntas(char idCuestionario[10],char idUsuario[25]);
+int modificarPreguntas(char idPregunta[10], char idCuestionario[10],char idUsuario[25]);
+
+int listarOpciones(char idCuestionario[10],char idUsuario[25],char idPregunta[10]);
+int agregarOpciones(char idCuestionario[10],char idUsuario[25],char idPregunta[10]);
+
+
 int manejoCuestionarios(char idUsuario[25])
 {
     //Variable para el control del menu de cuestionarios
     int opcionCuestionarios;
+
+    char idCuestionario[10];
+    char idPregunta[10];
 
     //Ciclo do...while para repetir el menu hasta que se selecciona 9 para salir al menu principal
     do{
@@ -31,8 +43,13 @@ int manejoCuestionarios(char idUsuario[25])
         printf("[3] Activar cuestionario\n");
         printf("[4] Desactivar cuestionario\n");
         printf("[5] Modificar cuestionario\n");
-        printf("[6] Gestionar preguntas de un cuestionario\n");
-        printf("[9] Regresar a menú principal\n");
+        printf("[6] Listar pregutas de un cuestionario\n");
+        printf("[7] Agregar pregunta\n");
+        printf("[8] Modificar pregunta\n");
+        printf("[9] Listar opciones de una pregunta\n");
+        printf("[10] Agregar opción\n");
+        printf("[11] Modificar opción\n");
+        printf("[0] Regresar a menú principal\n");
         printf("-------------------------------------------------------\n");
         fflush(stdout);
         printf("Su selección-->");
@@ -63,10 +80,57 @@ int manejoCuestionarios(char idUsuario[25])
             modificarCuestionario(idUsuario);
             break;
         case 6:
-            //Llama a la funcion para gestionar las preguntas de un cuestionario
-            gestionarCuestionario(idUsuario);
+            //Presenta una lista de todos los preguntas en este cuestionario
+            printf("Ingrese el id del cuestionario-->");
+            fflush(stdout);
+            scanf("%s",idCuestionario);
+            fflush(stdin);
+            listarPreguntas(idCuestionario,idUsuario);
+            break;
+        case 7:
+            printf("Agregar pregunta\n");
+            printf("Ingrese el id del cuestionario-->");
+            fflush(stdout);
+            scanf("%s",idCuestionario);
+            fflush(stdin);
+            agregarPreguntas(idCuestionario,idUsuario);
+            break;
+        case 8:
+            printf("Ingrese el id del cuestionario-->");
+            fflush(stdout);
+            scanf("%s",idCuestionario);
+            fflush(stdin);
+            printf("Ingrese el id de la pregunta-->");
+            fflush(stdout);
+            scanf("%s",idPregunta);
+            fflush(stdin);
+            modificarPreguntas(idPregunta,idCuestionario,idUsuario);
             break;
         case 9:
+            printf("Ingrese el id del cuestionario-->");
+            fflush(stdout);
+            scanf("%s",idCuestionario);
+            fflush(stdin);
+            printf("Ingrese el id de la pregunta-->");
+            fflush(stdout);
+            scanf("%s",idPregunta);
+            fflush(stdin);
+            //Presenta una lista de todos los opciones en esta pregunta
+            listarOpciones(idCuestionario,idUsuario,idPregunta);
+            break;
+        case 10:
+            printf("Ingrese el id del cuestionario-->");
+            fflush(stdout);
+            scanf("%s",idCuestionario);
+            fflush(stdin);
+            printf("Ingrese el id de la pregunta-->");
+            fflush(stdout);
+            scanf("%s",idPregunta);
+            fflush(stdin);
+            //Agrega una opcion nueva en la pregunta
+            agregarOpciones(idCuestionario,idUsuario,idPregunta);
+            break;
+        case 0:
             printf("Regresando a la pantalla principal...\n");
             fflush(stdout);
             Sleep(1000);

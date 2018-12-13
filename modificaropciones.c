@@ -3,7 +3,7 @@
 #include <windows.h>//Para usar la funcion Sleep
 #include "Opciones.h"//Incluir los datos de las opciones
 
-int modificarOpciones(char idCuestionario[10],char descCuestionario[100],char idUsuario[25],char idPregunta[10],char descPregunta[10]){
+int modificarOpciones(char idCuestionario[10],char idUsuario[25],char idPregunta[10]){
 
 int idOpcion;
 struct Opcion opcion;
@@ -16,8 +16,8 @@ FILE *f;
     f = fopen("Opciones.txt","r+");
     printf("-------------------------------------------------------\n");
     printf("Modificar opciones de una pregunta\n");
-    printf("Cuestionario %s\n", descCuestionario);
-    printf("Pregunta %s\n", descPregunta);
+    printf("Cuestionario %s\n", idCuestionario);
+    printf("Pregunta %s\n", idPregunta);
     printf("-------------------------------------------------------\n");
     fflush(stdout);
     //pedir datos del usuario a buscar

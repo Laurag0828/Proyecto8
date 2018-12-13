@@ -3,7 +3,7 @@
 #include <windows.h>//Para usar la funcion Sleep
 #include "Opciones.h"//Incluir el dato de tipo Opcion
 
-int listarOpciones(char idCuestionario[10],char descCuestionario[100],char idUsuario[25],char idPregunta[10],char descPregunta[10]){
+int listarOpciones(char idCuestionario[10],char idUsuario[25],char idPregunta[10]){
 
     FILE *f;
     struct Opcion opcion;
@@ -13,8 +13,8 @@ int listarOpciones(char idCuestionario[10],char descCuestionario[100],char idUsu
     //Descripicon de la pregunta
 
     printf("-------------------------------------------------------------------\n");
-    printf("Listado de opciones en pregunta %s\n", descPregunta);
-    printf("Cuestionario %s - %s\n", idCuestionario ,descCuestionario);
+    printf("Listado de opciones en pregunta %s\n", idPregunta);
+    printf("Cuestionario %s \n", idCuestionario);
     printf("Usuario: %s\n", idUsuario);
     printf("-------------------------------------------------------------------\n");
     fflush(stdout);

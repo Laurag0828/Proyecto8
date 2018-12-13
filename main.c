@@ -78,10 +78,11 @@ int main()
                             //Evalúa si el usuario ingresado es estudiante y presenta las opciones del estudiante
                             if(strcmp(usuarioLogeado.rol,"estudiante")==0){
                                 printf("[4] Responder un cuestionario\n");
+                                printf("[5] Mis Notas\n");
                                 fflush(stdout);
                             }
                             //Opciones para todos los usuarios
-                            printf("[5] Cambiar mi contraseña\n");
+                            printf("[6] Cambiar mi contraseña\n");
                             printf("[9] Salir del sistema\n");
                             printf("-------------------------------------------------------\n");
 
@@ -144,7 +145,7 @@ int main()
                                         system("cls");
                                     }
                                     break;
-                                case 5:
+                                case 6:
                                     cambiarContrasenia(usuarioLogeado.id);
                                     break;
                                 case 8:

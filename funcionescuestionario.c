@@ -152,7 +152,7 @@ int desactivarCuestionario(char idUsuario[25]){
         if(strcmp(idCuestionario,cuestionario.idCuestionario)==0 && strcmp(idUsuario,cuestionario.idUsuario)==0){
             //Si encuentra el cuestionario pregunta si va a activarlo
             do{
-                printf("Desea activar este cuestionario? (1=Si, 2=No)-->");
+                printf("Desea desactivar este cuestionario? (1=Si, 2=No)-->");
                 fflush(stdout);
                 scanf("%d",&respuesta);
                 fflush(stdin);
@@ -269,66 +269,6 @@ int modificarCuestionario(char idUsuario[25]){
     remove("Cuestionarios.txt");
     rename("Temporal.txt","Cuestionarios.txt");
     system("pause");
-    system("cls");
-    return 0;
-}
-
-
-int gestionarCuestionario(char idUsuario[25]){
-
-    FILE *fGestionar; //Apuntador para abrir archivos
-    struct Cuestionario cuestionario; //Para manejo del cuestionario
-    char idCuestionario[10];
-    int i; //variable de control para la posicion en el archivo
-    int respuesta=2; //Variable para la respuesta del usuario, inicializa en No
-    int encontrado=0; //variable de control para saber si se encuentra el cuestionario en el archivo
-
-    //Abre el archivo en modo lectura y escritura
-    fGestionar = fopen("Cuestionarios.txt","r");
-    printf("-------------------------------------------------------\n");
-    printf("Gestionar un cuestionario\n");
-    printf("-------------------------------------------------------\n");
-    fflush(stdout);
-    //pedir datos del cuestionario a buscar
-    printf("Ingrese el id del cuestionario a gestionar-->");
-    fflush(stdout);
-    scanf("%s",idCuestionario);
-    fflush(stdin);
-
-    i=0; //Inicializa el contador de registros
-
-    //Ciclo para buscar el cuestionario
-    while(fread(&cuestionario,sizeof(struct Cuestionario),1,fGestionar)){//Lee el archivo con el tamaño de la  estructura Cuestionario
-        if(strcmp(idCuestionario,cuestionario.idCuestionario)==0 && strcmp(idUsuario,cuestionario.idUsuario)==0){
-            //Si encuentra el cuestionario pregunta si va a desactivarlo
-            do{
-                printf("Desea gestionar este cuestionario? (1=Si, 2=No)-->");
-                fflush(stdout);
-                scanf("%d",&respuesta);
-                fflush(stdin);
-            } while(!(respuesta==1 || respuesta==2));//Repetir hasta que sea 1 o 2
-
-            if(respuesta==1){
-                system("cls");
-                manejoPreguntas(idUsuario,cuestionario.idCuestionario,cuestionario.descripcion);
-            }
-            else{
-                printf("Acción cancelada!!!\n");
-                fflush(stdout);
-            }
-            encontrado=1; //Si se encuentra un cuestionario se cambia la variable de control a encontrado
-            break; //Finaliza la modificacion de cuestionario, termina el ciclo de busqueda
-        }
-        i++;//Si no lo encuentra aumenta la posicion a un registro mas
-    }
-    if(encontrado==0){//Si la variable de control esta en cero significa que no encontró el cuestionario en el archivo
-        printf("----El cuestionario %s no está registrado -----\n",idCuestionario);
-        fflush(stdout);
-        system("pause");
-    }
-    //Cerrar el archivo
-    fclose(fGestionar);
-    fGestionar=NULL;
     system("cls");
     return 0;
 }
