@@ -8,7 +8,8 @@ int manejoCuestionarios(char id[25]); //Prototipo funcion manejo de cuestionario
 int responderCuestionario(char id[25]); //Prototipo funcion para responder cuestionarios
 int manejoReportes(char id[25]); //Prototipo funcion para presentar menu de reportes
 int cambiarContrasenia(char id[25]); //Prototipo funcion para cambiar contraseña
-int testdata();//Funcion para llenar de valores de prueba los archivos
+
+int listarMisNotas(char idUsuario[25]);
 
 
 /*Programa principal, maneja el menu principal del sistema*/
@@ -145,11 +146,21 @@ int main()
                                         system("cls");
                                     }
                                     break;
+                                case 5:
+                                    //Mira si tiene permiso
+                                    if(strcmp(usuarioLogeado.rol,"estudiante")==0){
+                                        //Llama a la funcion de responder cuestionarios con el id como argumento
+                                        listarMisNotas(usuarioLogeado.id);
+                                    }
+                                    else{
+                                        printf("No tiene permiso para esta opción!...");
+                                        fflush(stdout);
+                                        system("pause");
+                                        system("cls");
+                                    }
+                                    break;
                                 case 6:
                                     cambiarContrasenia(usuarioLogeado.id);
-                                    break;
-                                case 8:
-                                    testdata();
                                     break;
                                 case 0:
                                     //Sale del sistema (evaluacion en el while)
@@ -165,7 +176,7 @@ int main()
                                     break;
                             }
                         }
-                        while(opcionPrincipal!=9);
+                        while(opcionPrincipal!=0);
                         break;
                     }else{
                         //Si no coincide la contraseña la pide nuevamente
