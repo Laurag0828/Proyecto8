@@ -7,11 +7,11 @@ int manejoPreguntas(char idUsuario[25],char idCuestionario[10],char descCuestion
 
 int agregarCuestionario(char idUsuario[25]){
 
-    FILE *f; //Apuntador para abrir archivos
+    FILE *fAgregar; //Apuntador para abrir archivos
     struct Cuestionario cuestionario; //Para manejo del cuestionario
 
     //Abre el archivo para agregar
-    f = fopen("Cuestionarios.txt","a");
+    fAgregar = fopen("Cuestionarios.txt","a");
 
 
     printf("-------------------------------------------------------\n");
@@ -40,8 +40,9 @@ int agregarCuestionario(char idUsuario[25]){
         fflush(stdin);
     } while(!(cuestionario.activo==1 || cuestionario.activo==0));//Repetir hasta que sea 1 o 0
     //Escribir al cuestionario en el archivo
-    fwrite(&cuestionario, sizeof(cuestionario),1,f);
-    fclose(f);
+    fwrite(&cuestionario, sizeof(cuestionario),1,fAgregar);
+    fclose(fAgregar);
+    fAgregar=NULL;
     printf("Registro guardado, para agregar las preguntas de este cuestionario, vaya al menú 'Gestionar preguntas de un cuestionario'\n");
     printf("y luego seleccione 'Agregar pregunta'\n");
     fflush(stdout);
@@ -54,15 +55,18 @@ int agregarCuestionario(char idUsuario[25]){
 
 int activarCuestionario(char idUsuario[25]){
 
-    FILE *f; //Apuntador para abrir archivos
+    FILE *fActivar; //Apuntador para abrir archivos
+    FILE *fActivarTemp; //Apuntador para abrir archivos
     struct Cuestionario cuestionario; //Para manejo del cuestionario
     char idCuestionario[10];
     int respuesta=2; //Variable para la respuesta del usuario, inicializa en No
-    int i; //variable de control para la posicion en el archivo
     int encontrado=0; //variable de control para saber si se encuentra el cuestionario en el archivo
 
+    remove("Temporal.txt");
+
     //Abre el archivo en modo lectura y escritura
-    f = fopen("Cuestionarios.txt","r+");
+    fActivar = fopen("Cuestionarios.txt","r");
+    fActivarTemp = fopen("Temporal.txt","a");
     printf("-------------------------------------------------------\n");
     printf("Activar un cuestionario\n");
     printf("-------------------------------------------------------\n");
@@ -73,10 +77,8 @@ int activarCuestionario(char idUsuario[25]){
     scanf("%s",idCuestionario);
     fflush(stdin);
 
-    i=0; //Inicializa el contador de registros
-
     //Ciclo para buscar el cuestionario
-    while(fread(&cuestionario,sizeof(struct Cuestionario),1,f)){//Lee el archivo con el tamaño de la  estructura Cuestionario
+    while(fread(&cuestionario,sizeof(struct Cuestionario),1,fActivar)){//Lee el archivo con el tamaño de la  estructura Cuestionario
         if(strcmp(idCuestionario,cuestionario.idCuestionario)==0 && strcmp(idUsuario,cuestionario.idUsuario)==0){
             //Si encuentra el cuestionario pregunta si va a activarlo
             do{
@@ -88,28 +90,34 @@ int activarCuestionario(char idUsuario[25]){
 
             if(respuesta==1){
                 cuestionario.activo=1;
-                //Busca la posición del cuestionario en el archivo
-                fseek(f,i*sizeof(cuestionario),SEEK_SET);
                 //Escribe el cuestionario modificado en esa posición
-                fwrite(&cuestionario,sizeof(cuestionario),1,f);
+                fwrite(&cuestionario,sizeof(cuestionario),1,fActivarTemp);
                 printf("Cuestionario ahora está activo!\n");
                 fflush(stdout);
             }
             else{
+                fwrite(&cuestionario,sizeof(cuestionario),1,fActivarTemp);
                 printf("Acción cancelada!!!\n");
                 fflush(stdout);
             }
             encontrado=1; //Si se encuentra un cuestionario se cambia la variable de control a encontrado
-            break; //Finaliza la modificacion de cuestionario, termina el ciclo de busqueda
         }
-        i++;//Si no lo encuentra aumenta la posicion a un registro mas
+        else{
+            fwrite(&cuestionario,sizeof(cuestionario),1,fActivarTemp);
+        }
     }
     if(encontrado==0){//Si la variable de control esta en cero significa que no encontró el cuestionario en el archivo
         printf("----El cuestionario %s no está registrado -----\n",idCuestionario);
         fflush(stdout);
     }
     //Cerrar el archivo
-    fclose(f);
+    fclose(fActivarTemp);
+    fActivarTemp = NULL;
+    fclose(fActivar);
+    fActivar = NULL;
+
+    remove("Cuestionarios.txt");
+    rename("Temporal.txt","Cuestionarios.txt");
     system("pause");
     system("cls");
     return 0;
@@ -117,15 +125,18 @@ int activarCuestionario(char idUsuario[25]){
 
 int desactivarCuestionario(char idUsuario[25]){
 
-    FILE *f; //Apuntador para abrir archivos
+    FILE *fDesActivar; //Apuntador para abrir archivos
+    FILE *fDesActivarTemp; //Apuntador para abrir archivos
     struct Cuestionario cuestionario; //Para manejo del cuestionario
     char idCuestionario[10];
     int respuesta=2; //Variable para la respuesta del usuario, inicializa en No
-    int i; //variable de control para la posicion en el archivo
     int encontrado=0; //variable de control para saber si se encuentra el cuestionario en el archivo
 
+    remove("Temporal.txt");
+
     //Abre el archivo en modo lectura y escritura
-    f = fopen("Cuestionarios.txt","r+");
+    fDesActivar = fopen("Cuestionarios.txt","r");
+    fDesActivarTemp = fopen("Temporal.txt","a");
     printf("-------------------------------------------------------\n");
     printf("Desactivar un cuestionario\n");
     printf("-------------------------------------------------------\n");
@@ -136,14 +147,12 @@ int desactivarCuestionario(char idUsuario[25]){
     scanf("%s",idCuestionario);
     fflush(stdin);
 
-    i=0; //Inicializa el contador de registros
-
     //Ciclo para buscar el cuestionario
-    while(fread(&cuestionario,sizeof(struct Cuestionario),1,f)){//Lee el archivo con el tamaño de la  estructura Cuestionario
+    while(fread(&cuestionario,sizeof(struct Cuestionario),1,fDesActivar)){//Lee el archivo con el tamaño de la  estructura Cuestionario
         if(strcmp(idCuestionario,cuestionario.idCuestionario)==0 && strcmp(idUsuario,cuestionario.idUsuario)==0){
-            //Si encuentra el cuestionario pregunta si va a desactivarlo
+            //Si encuentra el cuestionario pregunta si va a activarlo
             do{
-                printf("Desea desactivar este cuestionario? (1=Si, 2=No)-->");
+                printf("Desea activar este cuestionario? (1=Si, 2=No)-->");
                 fflush(stdout);
                 scanf("%d",&respuesta);
                 fflush(stdin);
@@ -151,28 +160,34 @@ int desactivarCuestionario(char idUsuario[25]){
 
             if(respuesta==1){
                 cuestionario.activo=0;
-                //Busca la posición del cuestionario en el archivo
-                fseek(f,i*sizeof(cuestionario),SEEK_SET);
                 //Escribe el cuestionario modificado en esa posición
-                fwrite(&cuestionario,sizeof(cuestionario),1,f);
+                fwrite(&cuestionario,sizeof(cuestionario),1,fDesActivarTemp);
                 printf("Cuestionario ahora está inactivo!\n");
                 fflush(stdout);
             }
             else{
+                fwrite(&cuestionario,sizeof(cuestionario),1,fDesActivarTemp);
                 printf("Acción cancelada!!!\n");
                 fflush(stdout);
             }
             encontrado=1; //Si se encuentra un cuestionario se cambia la variable de control a encontrado
-            break; //Finaliza la modificacion de cuestionario, termina el ciclo de busqueda
         }
-        i++;//Si no lo encuentra aumenta la posicion a un registro mas
+        else{
+            fwrite(&cuestionario,sizeof(cuestionario),1,fDesActivarTemp);
+        }
     }
     if(encontrado==0){//Si la variable de control esta en cero significa que no encontró el cuestionario en el archivo
         printf("----El cuestionario %s no está registrado -----\n",idCuestionario);
         fflush(stdout);
     }
     //Cerrar el archivo
-    fclose(f);
+    fclose(fDesActivarTemp);
+    fDesActivarTemp = NULL;
+    fclose(fDesActivar);
+    fDesActivar = NULL;
+
+    remove("Cuestionarios.txt");
+    rename("Temporal.txt","Cuestionarios.txt");
     system("pause");
     system("cls");
     return 0;
@@ -181,15 +196,18 @@ int desactivarCuestionario(char idUsuario[25]){
 
 int modificarCuestionario(char idUsuario[25]){
 
-    FILE *f; //Apuntador para abrir archivos
+    FILE *fModificar; //Apuntador para abrir archivos
+    FILE *fModificarTemp; //Apuntador para abrir archivos
     struct Cuestionario cuestionario; //Para manejo del cuestionario
     char idCuestionario[10];
     int respuesta=2; //Variable para la respuesta del usuario, inicializa en No
-    int i; //variable de control para la posicion en el archivo
     int encontrado=0; //variable de control para saber si se encuentra el cuestionario en el archivo
 
+    remove("Temporal.txt");
+
     //Abre el archivo en modo lectura y escritura
-    f = fopen("Cuestionarios.txt","r+");
+    fModificar = fopen("Cuestionarios.txt","r");
+    fModificarTemp = fopen("Temporal.txt","a");
     printf("-------------------------------------------------------\n");
     printf("Modificar un cuestionario\n");
     printf("-------------------------------------------------------\n");
@@ -200,10 +218,8 @@ int modificarCuestionario(char idUsuario[25]){
     scanf("%s",idCuestionario);
     fflush(stdin);
 
-    i=0; //Inicializa el contador de registros
-
     //Ciclo para buscar el cuestionario
-    while(fread(&cuestionario,sizeof(struct Cuestionario),1,f)){//Lee el archivo con el tamaño de la  estructura Cuestionario
+    while(fread(&cuestionario,sizeof(struct Cuestionario),1,fModificar)){//Lee el archivo con el tamaño de la  estructura Cuestionario
         if(strcmp(idCuestionario,cuestionario.idCuestionario)==0 && strcmp(idUsuario,cuestionario.idUsuario)==0){
             //Si encuentra el cuestionario pregunta si va a desactivarlo
             do{
@@ -225,29 +241,31 @@ int modificarCuestionario(char idUsuario[25]){
                 fflush(stdout);
                 gets(cuestionario.asignatura);
                 fflush(stdin);
-                cuestionario.activo=0;
-                //Busca la posición del cuestionario en el archivo
-                fseek(f,i*sizeof(cuestionario),SEEK_SET);
                 //Escribe el cuestionario modificado en esa posición
-                fwrite(&cuestionario,sizeof(cuestionario),1,f);
+                fwrite(&cuestionario,sizeof(cuestionario),1,fModificarTemp);
                 printf("Cuestionario modificado!\n");
                 fflush(stdout);
             }
             else{
+                fwrite(&cuestionario,sizeof(cuestionario),1,fModificarTemp);
                 printf("Acción cancelada!!!\n");
                 fflush(stdout);
             }
             encontrado=1; //Si se encuentra un cuestionario se cambia la variable de control a encontrado
-            break; //Finaliza la modificacion de cuestionario, termina el ciclo de busqueda
         }
-        i++;//Si no lo encuentra aumenta la posicion a un registro mas
+        else{
+            fwrite(&cuestionario,sizeof(cuestionario),1,fModificarTemp);
+        }
     }
     if(encontrado==0){//Si la variable de control esta en cero significa que no encontró el cuestionario en el archivo
         printf("----El cuestionario %s no está registrado -----\n",idCuestionario);
         fflush(stdout);
     }
     //Cerrar el archivo
-    fclose(f);
+    fclose(fModificar);
+    fModificar=NULL;
+    remove("Cuestionarios.txt");
+    rename("Temporal.txt","Cuestionarios.txt");
     system("pause");
     system("cls");
     return 0;
@@ -256,7 +274,7 @@ int modificarCuestionario(char idUsuario[25]){
 
 int gestionarCuestionario(char idUsuario[25]){
 
-    FILE *f; //Apuntador para abrir archivos
+    FILE *fGestionar; //Apuntador para abrir archivos
     struct Cuestionario cuestionario; //Para manejo del cuestionario
     char idCuestionario[10];
     int i; //variable de control para la posicion en el archivo
@@ -264,7 +282,7 @@ int gestionarCuestionario(char idUsuario[25]){
     int encontrado=0; //variable de control para saber si se encuentra el cuestionario en el archivo
 
     //Abre el archivo en modo lectura y escritura
-    f = fopen("Cuestionarios.txt","r+");
+    fGestionar = fopen("Cuestionarios.txt","r");
     printf("-------------------------------------------------------\n");
     printf("Gestionar un cuestionario\n");
     printf("-------------------------------------------------------\n");
@@ -278,7 +296,7 @@ int gestionarCuestionario(char idUsuario[25]){
     i=0; //Inicializa el contador de registros
 
     //Ciclo para buscar el cuestionario
-    while(fread(&cuestionario,sizeof(struct Cuestionario),1,f)){//Lee el archivo con el tamaño de la  estructura Cuestionario
+    while(fread(&cuestionario,sizeof(struct Cuestionario),1,fGestionar)){//Lee el archivo con el tamaño de la  estructura Cuestionario
         if(strcmp(idCuestionario,cuestionario.idCuestionario)==0 && strcmp(idUsuario,cuestionario.idUsuario)==0){
             //Si encuentra el cuestionario pregunta si va a desactivarlo
             do{
@@ -307,14 +325,15 @@ int gestionarCuestionario(char idUsuario[25]){
         system("pause");
     }
     //Cerrar el archivo
-    fclose(f);
+    fclose(fGestionar);
+    fGestionar=NULL;
     system("cls");
     return 0;
 }
 
 
 int listarCuestionario(char idUsuario[25]){
-    FILE *f; //Apuntador para abrir archivos
+    FILE *fListar; //Apuntador para abrir archivos
     struct Cuestionario cuestionario; //Para manejo del cuestionario
     //consulta todos los cuestionarios
     printf("-------------------------------------------------------------------\n");
@@ -322,17 +341,18 @@ int listarCuestionario(char idUsuario[25]){
     printf("-------------------------------------------------------------------\n");
     fflush(stdout);
     //Abre el archivo
-    f = fopen("Cuestionarios.txt","r");
+    fListar = fopen("Cuestionarios.txt","r");
     printf("%-10s%-60s%-20s%10s%10s\n","Id","Descripcion","Asignatura","No. preguntas","Activo");
     fflush(stdout);
-    while(fread(&cuestionario,sizeof(struct Cuestionario),1,f)){//Lee el archivo con el tamaño de la  estructura Cuestionario
+    while(fread(&cuestionario,sizeof(struct Cuestionario),1,fListar)){//Lee el archivo con el tamaño de la  estructura Cuestionario
         if(strcmp(idUsuario,cuestionario.idUsuario)==0){
             printf("%-10s%-60s%-20s%10d%10d\n",cuestionario.idCuestionario,cuestionario.descripcion,cuestionario.asignatura,cuestionario.cantPreg,cuestionario.activo);
             fflush(stdout);
         }
     }
     //Cierra el archivo
-    fclose(f);
+    fclose(fListar);
+    fListar=NULL;
     system("pause");
     fflush(stdout);
     system("cls");
