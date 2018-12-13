@@ -264,6 +264,8 @@ int modificarCuestionario(char idUsuario[25]){
     //Cerrar el archivo
     fclose(fModificar);
     fModificar=NULL;
+    fclose(fModificarTemp);
+    fModificarTemp=NULL;
     remove("Cuestionarios.txt");
     rename("Temporal.txt","Cuestionarios.txt");
     system("pause");
