@@ -42,6 +42,7 @@ int agregarOpciones(char idCuestionario[10],char descCuestionario[100],char idUs
     fclose(f);
 
     f = fopen("Preguntas.txt","r+");
+
     i=0; //Inicializa el contador a cero que es el inicio del archivo
 
 

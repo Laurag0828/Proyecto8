@@ -15,6 +15,7 @@ int responderCuestionario(char idUsuario[25]){
     FILE *f;
     struct Usuario usuario;
     char idDocente[25];
+    int encontrado; //variable de control para saber si se encuentra una pregunta
 
 
     printf("--------------------------------------------------------------\n");
@@ -37,16 +38,21 @@ int responderCuestionario(char idUsuario[25]){
 
     printf("\nFavor seleccione el id del docente del cuestionario-->");
     scanf("%s",idDocente);
-
+    encontrado=0; //Inicializa la variable de control en preguntas aun no encontrado
     f = fopen("Usuarios.txt","r");
-    printf("%-20s%-20s%-20s\n","Id","Nombre","Rol");
     while(fread(&usuario,sizeof(struct Usuario),1,f)){//Lee el archivo con el tamaño de la  estructura Usuario
         if (strcmp(idDocente, usuario.id)==0 && usuario.activo==1){
+            encontrado=1;
             seleccionarCuestionario(idUsuario,idDocente);
         }
     }
     fclose(f);
 
+    if(encontrado==0){//Si la variable de control esta en cero significa que no encontró
+        printf("----El docente %s no está registrado -----\n",idDocente);
+        system("pause");
+    }
+    system("cls");
     return 0;
 
 }
